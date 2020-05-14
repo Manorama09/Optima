@@ -1,42 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import '../models/http_exception.dart';
 
 import './product.dart';
 
 class Products with ChangeNotifier {
-  List<Product> _items = [
-    Product(
-      id: 'p1',
-      title: 'Goodlife Milk',
-      description: 'A dairy product',
-      price: 22,
-      imageUrl:
-          'https://www.biggro.com/content/images/thumbs/0015514_good-life-cow-milk-brick-500-ml_550.jpeg',
-    ),
-    Product(
-      id: 'p2',
-      title: 'Basmati Rice',
-      description: 'Staple food',
-      price: 300,
-      imageUrl:
-          'https://images-na.ssl-images-amazon.com/images/I/61yIOKgKbfL._SX425_.jpg',
-    ),
-    Product(
-      id: 'p3',
-      title: 'Ashirvaad Atta',
-      description: 'Staple food',
-      price: 450,
-      imageUrl:
-          'https://d37ky63zmmmzfj.cloudfront.net/production/itemimages/grocery/flours_sooji/wheat_atta/itc_food_aashir_atta_5kg.jpg',
-    ),
-    Product(
-      id: 'p4',
-      title: 'Lays',
-      description: 'All time snack',
-      price: 20,
-      imageUrl:
-          'https://images-na.ssl-images-amazon.com/images/I/81vJyb43URL._SX425_PIbundle-40,TopRight,0,0_AA425SH20_.jpg',
-    ),
-  ];
+  List<Product> _items = [];
   // var _showFavoritesOnly = false;
 
   List<Product> get items {
@@ -63,34 +34,92 @@ class Products with ChangeNotifier {
   //   _showFavoritesOnly = false;
   //   notifyListeners();
   // }
-
-  void addProduct(Product product) {
-    final newProduct = 
-    Product(
-      title: product.title,
-      description: product.description,
-      price: product.price,
-      imageUrl: product.imageUrl,
-      id: DateTime.now().toString(),
-      );
-
-     _items.add(newProduct);
-     //_items.insert(0,newProduct);
-    notifyListeners();
-  }
-
-  void updateProduct(String id, Product newProduct){
-    final prodIndex = _items.indexWhere((prod) => prod.id==id);
-    if(prodIndex>=0){
-    _items[prodIndex] = newProduct;
-    notifyListeners();
-    } else {
-        print('....');
+  Future<void> fetchAndSetProducts() async {
+    const url = 'https://flutter-update.firebaseio.com/products.json';
+    try {
+      final response = await http.get(url);
+      final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      final loadedProducts = [];
+      extractedData.forEach((prodId, prodData) {
+        loadedProducts.add(Product(
+          id: prodId,
+          title: prodData('title'),
+          description: prodData('description'),
+          price: prodData('price'),
+          isFavorite: prodData('isFavorite'),
+          imageUrl: prodData('imageUrl'),
+        ));
+      });
+      _items = loadedProducts;
+      notifyListeners();
+      print(response);
+    } catch (error) {
+      throw (error);
     }
   }
 
-  void deleteProduct(String id){
-    _items.removeWhere((prod)=>prod.id==id);
-    notifyListeners();
+  Future<void> addProduct(Product product) async {
+    const url = 'https://flutter-update.firebaseio.com/products.json';
+    try {
+      final response = await http.post(
+        url,
+        body: json.encode({
+          'title': product.title,
+          'description': product.description,
+          'imageUrl': product.imageUrl,
+          'price': product.price,
+          'isFavorite': product.isFavorite,
+        }),
+      );
+      final newProduct = Product(
+        title: product.title,
+        description: product.description,
+        price: product.price,
+        imageUrl: product.imageUrl,
+        id: json.decode(response.body)['name'],
+      );
+      _items.add(newProduct);
+      // _items.insert(0, newProduct); // at the start of the list
+      notifyListeners();
+    } catch (error) {
+      print(error);
+      throw error;
+    }
+  }
+
+  Future<void> updateProduct(String id, Product newProduct) async {
+    final prodIndex = _items.indexWhere((prod) => prod.id == id);
+
+    if (prodIndex >= 0) {
+      final url = 'https://flutter-update.firebaseio.com/products/$id.json';
+      await http.patch(url,
+          body: json.encode({
+            'title': newProduct.title,
+            'description': newProduct.description,
+            'imageUrl': newProduct.imageUrl,
+            'price': newProduct.price,
+          }));
+      _items[prodIndex] = newProduct;
+      notifyListeners();
+    } else {
+      print('...');
+    }
+  }
+
+  Future<void> deleteProduct(String id) async {
+    final url = 'https://flutter-update.firebaseio.com/products/$id.json';
+    final existingProductIndex = _items.indexWhere((prod) => prod.id == id);
+    var existingProduct = _items[existingProductIndex];
+    _items.removeAt(existingProductIndex);
+    notifyListeners();   
+   
+    final response = await http.delete(url);
+
+    // if (response.statusCode >= 400) {
+    //   _items.insert(existingProductIndex, existingProduct);
+    //   notifyListeners();
+    //   throw HttpException('Could not delete the product.');
+    // }
+    existingProduct = null;
   }
 }
