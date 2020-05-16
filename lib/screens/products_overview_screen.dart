@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/cart.dart';
 import '../widgets/app_drawer.dart';
-import '../widgets/products_grid.dart';
+import '../widgets/products_list.dart';
 import '../widgets/badge.dart';
 import '../screens/cart_screen.dart';
 import '../providers/products.dart';
@@ -24,9 +24,6 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
 
   @override
   void initState() {
-    // Future.delayed(Duration.zero).then((_){
-    //   Provider.of<Products>(context).fetchAndSetProducts();
-    // });
     super.initState();
   }
 
@@ -139,7 +136,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
                 )),
           ),
           Expanded(
-            child: ProductsGrid(_showOnlyFavorites),
+            child: ProductsList(_showOnlyFavorites),
           )
         ],
       ),

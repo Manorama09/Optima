@@ -16,7 +16,6 @@ class UserProductsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final productsData = Provider.of<Products>(context);
     print('rebuilding...');
     return Scaffold(
       appBar: AppBar(
@@ -50,7 +49,6 @@ class UserProductsScreen extends StatelessWidget {
                                       UserProductItem(
                                         productsData.items[i].id,
                                         productsData.items[i].title,
-                                        productsData.items[i].imageUrl,
                                       ),
                                       Divider(),
                                     ],
