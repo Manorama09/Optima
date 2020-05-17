@@ -1,0 +1,119 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'constants.dart';
+import 'package:optimaibmhack/RoundedButton.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'login_screen.dart';
+const kTextFieldDecoration=InputDecoration(
+  hintText: 'Enter a value',
+
+  contentPadding:
+  EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+  border: OutlineInputBorder(
+    borderRadius: BorderRadius.all(Radius.circular(32.0)),
+  ),
+  enabledBorder: OutlineInputBorder(
+    borderSide: BorderSide(color: Colors.redAccent, width: 1.0),
+    borderRadius: BorderRadius.all(Radius.circular(32.0)),
+  ),
+  focusedBorder: OutlineInputBorder(
+    borderSide: BorderSide(color: Colors.red, width: 2.0),
+    borderRadius: BorderRadius.all(Radius.circular(32.0)),
+  ),
+);
+List<String> checkerSeller=List();
+List<String> checkerBuyer=List();
+
+String uid_processing;
+class PostLoginProcessing extends StatefulWidget {
+  @override
+  _PostLoginProcessingState createState() => _PostLoginProcessingState();
+}
+
+class _PostLoginProcessingState extends State<PostLoginProcessing> {
+
+  bool showSpinner=false;
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+
+
+  getCurrentUserID() async {
+    final FirebaseUser user = await _auth.currentUser();
+    uid_processing = user.uid.toString();
+  }
+
+
+
+  Future getDocs() async {
+    QuerySnapshot querySnapshot = await Firestore.instance.collection("Seller").getDocuments();
+    for (int i = 0; i < querySnapshot.documents.length; i++) {
+      var a = querySnapshot.documents[i];
+      print(a.documentID);
+      checkerSeller.add(a.documentID.toString());
+    }
+  }
+  Future getDocs2() async {
+    QuerySnapshot querySnapshot = await Firestore.instance.collection("Buyer").getDocuments();
+    for (int i = 0; i < querySnapshot.documents.length; i++) {
+      var a = querySnapshot.documents[i];
+      print(a.documentID);
+      checkerBuyer.add(a.documentID.toString());
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+
+            Hero(
+              tag: 'logo',
+              child: Container(
+                height: 100.0,
+                child: Image.asset('images/new_optima.png'),
+              ),
+            ),
+            SizedBox(
+              height: 50.0,
+            ),
+            Text('Processing Log In',
+            style: TextStyle(
+              fontFamily: 'Montferrat',
+              fontSize: 30.0,
+            ),),
+
+            SizedBox(
+              height: 50.0,
+            ),
+
+            RoundedButton(
+              colour: Colors.redAccent,
+              title: 'Click here to proceed',
+              onPressed:() async {
+                getCurrentUserID();
+                getDocs();
+                getDocs2();
+
+                  if(checkerSeller.contains(uid_processing)){
+                    Navigator.pushNamed(context, 'SellerScreen');
+                  }
+                  else if(checkerBuyer.contains(uid_processing))   {
+                    Navigator.pushNamed(context, 'screen1_user');
+                  }
+                }
+
+
+            ),
+
+          ],
+        ),
+      ),
+    );
+  }
+}
