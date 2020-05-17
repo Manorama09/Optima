@@ -1,0 +1,66 @@
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+class DatabaseService{
+
+  final String uid;
+  DatabaseService({this.uid});
+
+
+  final CollectionReference ownerCollection = Firestore.instance.collection('Owner_information');
+
+  Future updateOwnerData(String name) async {
+    return await ownerCollection.document(uid).setData({
+      'Name':name,
+    });
+  }
+}
+
+class ItemAdder{
+
+  final String uid;
+  ItemAdder({this.uid});
+
+
+  final CollectionReference ownerCollection = Firestore.instance.collection('Owner_information');
+
+  Future updateOwnerItems(List item) async {
+    return await ownerCollection.document(uid).setData({
+
+      'Item':item,
+    });
+  }
+}
+
+
+class UIDAdderSeller{
+
+  final String uid_seller;
+  UIDAdderSeller({this.uid_seller});
+
+
+  final CollectionReference selleruid = Firestore.instance.collection('Seller');
+
+  Future addSellerUID(String uidofseller) async {
+    return await selleruid.document(uid_seller).setData({
+
+      'seller_uid':uidofseller,
+    });
+  }
+}
+
+class UIDAdderBuyer{
+
+  final String uid_buyer;
+  UIDAdderBuyer({this.uid_buyer});
+
+
+  final CollectionReference buyeruid = Firestore.instance.collection('Buyer');
+
+  Future addBuyerUID(String uidofbuyer) async {
+    return await buyeruid.document(uid_buyer).setData({
+
+      'buyer_uid':uidofbuyer,
+    });
+  }
+}
