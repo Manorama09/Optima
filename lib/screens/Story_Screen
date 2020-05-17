@@ -1,0 +1,95 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+class StoryScreen extends StatefulWidget {
+  @override
+  _StoryScreenState createState() => _StoryScreenState();
+}
+
+class _StoryScreenState extends State<StoryScreen> {
+  List<String> message=["Optima is our attempt at making the grocery purchase process during the COVID 19 times more safe and efficient.",
+  "We aim to make sure that each buyer only goes to a shop when the item that they need is available while also being able to indicate the shop owner about the absence of a product they need.",
+  "Besides that, the shop owner can visualize the kind of product demand in that specific community and place orders based on these statistics.",
+  "Ultimately, with the help of several algorithms, we define the nature of product demand in a specific community and provide customized analytics for economic business during these tough times."];
+  int i=0;
+
+  void changeMessage(){
+    setState(() {
+      i++;
+    });
+
+  }
+
+  @override
+
+
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              margin: EdgeInsets.all(4.0) ,
+              child: Center(
+
+                child: Text(message[i],
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                color: Colors.black,
+                  fontSize: 30.0,
+
+                ),
+                ),
+    ),
+            ),
+            SizedBox(
+              height: 50.0,
+            ),
+            IconButton(
+              icon: Icon(
+                Icons.arrow_forward_ios,
+                color: Colors.red,
+                size: 25.0,
+              ),
+              tooltip: 'Read more',
+              onPressed: () {
+                if (i != 3) {
+                  setState(() {
+                    changeMessage();
+                  });
+                }
+              else if(i==3){
+                Navigator.push(context, new MaterialPageRoute(
+                    builder: (context) =>
+                new ProductsOverviewScreen()));
+                }
+              }
+
+            ),
+              SizedBox(
+                height: 150.0,
+              ),
+              Hero(
+                tag: 'logo',
+                child: Container(
+                  child: Image.asset('images/logo.png'),
+                  height: 50.0,
+                ),
+              ),
+              Center(
+                child: Text(
+                  'Shopping made easy',
+                  style: TextStyle(
+                    fontSize: 8.0,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+
+          ],
+        ),
+      ),
+    );
+  }
+}
