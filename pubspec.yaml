@@ -25,13 +25,15 @@ dependencies:
   cupertino_icons: ^0.1.2
   draggable_floating_button: ^0.1.1
   watson_assistant_v2: ^0.0.1
+  flutter_ibm_watson: ^0.0.2
+  image_picker: ^0.6.6+1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   provider: ^4.0.5+1
   intl: ^0.16.1
-  http: ^0.12.1
+  http: ^0.11.3+16
 
 
 # For information on the generic Dart part of this file, see the
