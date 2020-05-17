@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../providers/product.dart';
 import '../providers/products.dart';
-
+import 'VisualRec.dart';
 class EditProductScreen extends StatefulWidget {
   static const routeName = '/edit-product';
 
@@ -194,6 +193,24 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         );
                       },
                     ),
+                    SizedBox(
+                      height: 100.0,
+                    ),
+                    FloatingActionButton(
+                      backgroundColor: Colors.redAccent,
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => ScreenVisualRecognition()));
+                      },
+                      child: Icon(
+                        Icons.add,
+
+                      ),
+                      heroTag: "Watson Visual Recognition",
+                    ),
+
+
+
                   ],
                 ),
               ),
