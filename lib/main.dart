@@ -11,7 +11,7 @@ import './screens/orders_screen.dart';
 import './screens/user_products_screen.dart';
 import './screens/edit_product_screen.dart';
 import './providers/auth.dart';
-
+import 'package:optima/screens/Welcome_screen.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
                 accentColor: Colors.deepOrange[100],
                 fontFamily: 'Lato',
               ),
-              home: auth.isAuth ? ProductsOverviewScreen() : AuthScreen(),
+              home: auth.isAuth ? ProductsOverviewScreen() : WelcomeScreen(),
               routes: {
                 AuthScreen.routeName: (ctx) => AuthScreen(),
                 CartScreen.routeName: (ctx) => CartScreen(),
