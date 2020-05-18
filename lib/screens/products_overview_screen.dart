@@ -23,7 +23,7 @@ class ProductsOverviewScreen extends StatefulWidget {
 }
 
 class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
-
+static const routeName = '/products_overview_screen';
   final String user;
   _ProductsOverviewScreenState(this.user);
   
@@ -52,6 +52,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   }
 
   AppBar getAppBar() {
+    
     return AppBar(
       title: Text('Optima'),
       actions: <Widget>[

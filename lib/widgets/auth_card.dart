@@ -220,40 +220,40 @@ class _AuthCardState extends State<AuthCard> {
                   SizedBox(
                     height: 15,
                    ),
-                  //  Row(
-                  //      mainAxisAlignment: MainAxisAlignment.start,
-                  //      children: <Widget>[
-                  //        new Radio(
-                  //          value: 0,
-                  //          groupValue: radioValue,
-                  //          onChanged: (newValue) {
-                  //           handleRadioValueChange(0);
-                  //            setState(() {
-                  //              print(result);
-                  //              authData['user'] = result;
-                  //            });
-                  //          },
-                  //        ),
-                  //        new Text('Customer'),
-                  //        new Radio(
-                  //          value: 1,
-                  //          groupValue: radioValue,
-                  //         onChanged: (newValue) {
-                  //           handleRadioValueChange(1);
-                  //            setState(() {
-                  //              authData['user'] = result;
-                  //            });
-                  //          },
-                  //        ),
-                  //        new Text('Seller'),
-                  //      ],
-                  //    ),
-                 TextFormField(
-                 decoration: InputDecoration(labelText: 'customer/seller'),
-                 onSaved: (value) {
-                   authData['user'] = value;
-                 },
-                 ),
+                   Row(
+                       mainAxisAlignment: MainAxisAlignment.start,
+                       children: <Widget>[
+                         new Radio(
+                           value: 0,
+                           groupValue: radioValue,
+                           onChanged: (newValue) {
+                            handleRadioValueChange(0);
+                             setState(() {
+                               print(result);
+                               authData['user'] = result;
+                             });
+                           },
+                         ),
+                         new Text('Customer'),
+                         new Radio(
+                           value: 1,
+                           groupValue: radioValue,
+                          onChanged: (newValue) {
+                            handleRadioValueChange(1);
+                             setState(() {
+                               authData['user'] = result;
+                             });
+                           },
+                         ),
+                         new Text('Seller'),
+                       ],
+                     ),
+                //  TextFormField(
+                //  decoration: InputDecoration(labelText: 'customer/seller'),
+                //  onSaved: (value) {
+                //    authData['user'] = value;
+                //  },
+                //  ),
 
                 SizedBox(
                   height: 20,
