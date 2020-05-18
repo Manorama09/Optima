@@ -262,14 +262,14 @@ class AuthCard extends StatefulWidget {
 class _AuthCardState extends State<AuthCard> {
   final GlobalKey<FormState> _formKey = GlobalKey();
   AuthMode _authMode = AuthMode.Login;
-  Map<String, String> _authData = {
+  Map<String, String> authData = {
     'email': '',
     'password': '',
     'user':''
   };
   var _isLoading = false;
   final _passwordController = TextEditingController();
-  String _result ='';
+  String result;
 
   void _showErrorDialog(String message) {
     showDialog(
@@ -302,41 +302,43 @@ class _AuthCardState extends State<AuthCard> {
       if (_authMode == AuthMode.Login) {
         // Log user in
         await Provider.of<Auth>(context, listen: false).login(
-          _authData['email'],
-          _authData['password'],
-          _authData['user']
+          authData['email'],
+          authData['password'],
+          authData['user']
         );
       } else {
         // Sign user up
         await Provider.of<Auth>(context, listen: false).signup(
-          _authData['email'],
-          _authData['password'],
-          _authData['user']
+          authData['email'],
+          authData['password'],
+          authData['user']
         );
 
         try {
         final newUser = new User(
-        email: _authData['email'],
-        userType: _authData['user']
+        email: authData['email'],
+        userType: authData['user']
        // id: json.decode(response.body)['name'],
       );
         await Provider.of<Users>(context, listen: false).addUser(newUser);
-      } catch (error) {
-        await showDialog(
-          context: context,
-          builder: (ctx) => AlertDialog(
-                title: Text('An error occurred!'),
-                content: Text('Something went wrong.'),
-                actions: <Widget>[
-                  FlatButton(
-                    child: Text('Okay'),
-                    onPressed: () {
-                      Navigator.of(ctx).pop();
-                    },
-                  )
-                ],
-              ),
-        );
+      }
+      catch (error)
+      {
+//        await showDialog(
+//          context: context,
+//          builder: (ctx) => AlertDialog(
+//                title: Text('An error occurred!'),
+//                content: Text('Something went wrong.'),
+//                actions: <Widget>[
+//                  FlatButton(
+//                    child: Text('Okay'),
+//                    onPressed: () {
+//                      Navigator.of(ctx).pop();
+//                    },
+//                  )
+//                ],
+//              ),
+
       }
       }
     } on HttpException catch (error) {
@@ -363,7 +365,7 @@ class _AuthCardState extends State<AuthCard> {
       _isLoading = false;
       Navigator.push(context, new MaterialPageRoute(
           builder: (context) =>
-      new ProductsOverviewScreen(_authData['user']))
+      new ProductsOverviewScreen(authData['user']))
       );
     });
   }
@@ -380,17 +382,17 @@ class _AuthCardState extends State<AuthCard> {
     }
   }
 
-  int _radioValue=0;
+  int radioValue=0;
 
-  void _handleRadioValueChange(int value) {
+  void handleRadioValueChange(int value) {
     setState(() {
-      _radioValue = value; 
-      switch (_radioValue) {
+      radioValue = value;
+      switch (radioValue) {
         case 0:
-        _result= 'customer';
+        result= 'customer';
           break;
         case 1:
-        _result= 'seller';        
+        result= 'seller';
           break;
       }
     });
@@ -426,7 +428,7 @@ class _AuthCardState extends State<AuthCard> {
                   },
 
                   onSaved: (value) {
-                    _authData['email'] = value;
+                    authData['email'] = value;
                   },
                 ),
                 TextFormField(
@@ -439,7 +441,7 @@ class _AuthCardState extends State<AuthCard> {
                     }
                   },
                   onSaved: (value) {
-                    _authData['password'] = value;
+                    authData['password'] = value;
                   },
                 ),
                 if (_authMode == AuthMode.Signup)
@@ -458,39 +460,40 @@ class _AuthCardState extends State<AuthCard> {
                   SizedBox(
                     height: 15,
                    ),
-                  // Row(
-                  //     mainAxisAlignment: MainAxisAlignment.start,
-                  //     children: <Widget>[
-                  //       new Radio(
-                  //         value: 0,
-                  //         groupValue: _radioValue,
-                  //         onChanged: (newValue) {
-                  //          _handleRadioValueChange(_radioValue);
-                  //           setState(() {
-                  //             _authData['user'] = _result;
-                  //           });
-                  //         },
-                  //       ),
-                  //       new Text('Customer'),
-                  //       new Radio(
-                  //         value: 1,
-                  //         groupValue: _radioValue,
-                  //        onChanged: (newValue) {
-                  //          _handleRadioValueChange(_radioValue);
-                  //           setState(() {
-                  //             _authData['user'] = _result;
-                  //           });
-                  //         },
-                  //       ),
-                  //       new Text('Seller'),
-                  //     ],
-                  //   ),
-                  TextFormField(
-                  decoration: InputDecoration(labelText: 'customer/seller'),
-                  onSaved: (value) {
-                    _authData['user'] = value;
-                  },
-                  ),
+                   Row(
+                       mainAxisAlignment: MainAxisAlignment.center,
+                       children: <Widget>[
+                         new Radio(
+                           value: 0,
+                           groupValue: radioValue,
+                           onChanged: (newValue) {
+                            handleRadioValueChange(0);
+                             setState(() {
+                               print(result);
+                               authData['user'] = result;
+                             });
+                           },
+                         ),
+                         new Text('Customer'),
+                         new Radio(
+                           value: 1,
+                           groupValue: radioValue,
+                          onChanged: (newValue) {
+                            handleRadioValueChange(1);
+                             setState(() {
+                               authData['user'] = result;
+                             });
+                           },
+                         ),
+                         new Text('Seller'),
+                       ],
+                     ),
+//                  TextFormField(
+//                  decoration: InputDecoration(labelText: 'customer/seller'),
+//                  onSaved: (value) {
+//                    authData['user'] = value;
+//                  },
+//                  ),
 
                 SizedBox(
                   height: 20,
