@@ -5,15 +5,16 @@ import '../providers/auth.dart';
 import 'package:provider/provider.dart';
 
 class AppDrawer extends StatelessWidget {
+
+  final String user;
+  AppDrawer(this.user);
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
-        child: Column(children: <Widget>[
+      child: Column(children: <Widget>[
       UserAccountsDrawerHeader(
-        accountName: Text(
-          "UserName",
-          style: TextStyle(fontSize: 20),
-        ),
+        accountName: Text('Hello there!') ,
         accountEmail: Text("email@email.com"),
         currentAccountPicture: CircleAvatar(
           backgroundColor: Colors.white,
@@ -23,13 +24,14 @@ class AppDrawer extends StatelessWidget {
           ),
         ),
       ),
+      if(user.startsWith('c'))
       ListTile(
           leading: Icon(Icons.shopping_cart),
           title: Text('Shop'),
           onTap: () {
             Navigator.of(context).pushNamed('/');
           }),
-      Divider(),
+      if(user.startsWith('c'))
       ListTile(
           leading: Icon(Icons.payment),
           title: Text('Orders'),
@@ -37,7 +39,7 @@ class AppDrawer extends StatelessWidget {
             Navigator.of(context).pushNamed(OrdersScreen.routeName);
           }
           ),
-          Divider(),
+          if(user.startsWith('s'))
       ListTile(
           leading: Icon(Icons.edit),
           title: Text('Manage Products'),

@@ -3,7 +3,6 @@ import './screens/auth_screen.dart.dart';
 import './screens/cart_screen.dart';
 import 'package:provider/provider.dart';
 import './screens/products_overview_screen.dart';
-import './screens/product_detail_screen.dart';
 import './providers/products.dart';
 import './providers/cart.dart';
 import './providers/orders.dart';
@@ -11,8 +10,11 @@ import './screens/orders_screen.dart';
 import './screens/user_products_screen.dart';
 import './screens/edit_product_screen.dart';
 import './providers/auth.dart';
-import 'package:optima/screens/Welcome_screen.dart';
-void main() => runApp(MyApp());
+import './providers/users.dart';
+//import './splash_screen.dart';
+// import './screens/Welcome_screen.dart';
+
+void main()=>runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
@@ -41,22 +43,29 @@ class MyApp extends StatelessWidget {
               : previousOrders.orders
               ),
           ),
+          ChangeNotifierProxyProvider<Auth, Users>(
+            update: (ctx, auth, previousUsers) 
+            => Users(
+                auth.token,
+                auth.userId,
+                previousUsers == null ? [] : previousUsers.users),
+          ),
         ],
         child: Consumer<Auth>(
           builder: (ctx, auth, _) => MaterialApp(
               title: 'OPTIMA',
               theme: ThemeData(
                 primarySwatch: Colors.deepOrange,
-                accentColor: Colors.deepOrange[100],
+                accentColor: Colors.deepOrange,
                 fontFamily: 'Lato',
               ),
-              home: auth.isAuth ? ProductsOverviewScreen() : AuthScreen(),
+              home: 
+              auth.isAuth ? ProductsOverviewScreen(auth.user) : AuthScreen(),
               routes: {
                 AuthScreen.routeName: (ctx) => AuthScreen(),
                 CartScreen.routeName: (ctx) => CartScreen(),
-                ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
-                OrdersScreen.routeName: (ctx) => OrdersScreen(),
-                UserProductsScreen.routeName: (ctx) => UserProductsScreen(),
+                OrdersScreen.routeName: (ctx) => OrdersScreen(auth.user),
+                UserProductsScreen.routeName: (ctx) => UserProductsScreen(auth.user),
                 EditProductScreen.routeName: (ctx) => EditProductScreen(),
               }),
         ));

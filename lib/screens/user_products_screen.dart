@@ -7,6 +7,10 @@ import '../widgets/app_drawer.dart';
 import './edit_product_screen.dart';
 
 class UserProductsScreen extends StatelessWidget {
+
+  final String user;
+  UserProductsScreen(this.user);
+
   static const routeName = '/user-products';
 
   Future<void> _refreshProducts(BuildContext context) async {
@@ -29,7 +33,7 @@ class UserProductsScreen extends StatelessWidget {
           ),
         ],
       ),
-      drawer: AppDrawer(),
+      drawer: AppDrawer(user),
       body: FutureBuilder(
         future: _refreshProducts(context),
         builder: (ctx, snapshot) =>

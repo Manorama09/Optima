@@ -1,9 +1,10 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth.dart';
 import '../models/http_exception.dart';
+import '../providers/users.dart';
+import '../providers/user.dart';
 
 enum AuthMode { Signup, Login }
 
@@ -25,7 +26,7 @@ class AuthScreen extends StatelessWidget {
             child: Container(
               margin: EdgeInsets.symmetric(
                 horizontal: 40,
-                vertical: 130
+                vertical: 100
                 ),
               child: Text('Hey there!',
                 style: TextStyle(
@@ -104,9 +105,11 @@ class _AuthCardState extends State<AuthCard> {
   Map<String, String> _authData = {
     'email': '',
     'password': '',
+    'user':''
   };
   var _isLoading = false;
   final _passwordController = TextEditingController();
+  String _result ='';
 
   void _showErrorDialog(String message) {
     showDialog(
@@ -141,13 +144,40 @@ class _AuthCardState extends State<AuthCard> {
         await Provider.of<Auth>(context, listen: false).login(
           _authData['email'],
           _authData['password'],
+          _authData['user']
         );
       } else {
         // Sign user up
         await Provider.of<Auth>(context, listen: false).signup(
           _authData['email'],
           _authData['password'],
+          _authData['user']
         );
+
+        try {
+        final newUser = new User(
+        email: _authData['email'],
+        userType: _authData['user']
+       // id: json.decode(response.body)['name'],
+      );
+        await Provider.of<Users>(context, listen: false).addUser(newUser);
+      } catch (error) {
+        await showDialog(
+          context: context,
+          builder: (ctx) => AlertDialog(
+                title: Text('An error occurred!'),
+                content: Text('Something went wrong.'),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text('Okay'),
+                    onPressed: () {
+                      Navigator.of(ctx).pop();
+                    },
+                  )
+                ],
+              ),
+        );
+      }
       }
     } on HttpException catch (error) {
       var errorMessage = 'Authentication failed';
@@ -186,16 +216,33 @@ class _AuthCardState extends State<AuthCard> {
     }
   }
 
+  int _radioValue=0;
+
+  void _handleRadioValueChange(int value) {
+    setState(() {
+      _radioValue = value; 
+      switch (_radioValue) {
+        case 0:
+        _result= 'customer';
+          break;
+        case 1:
+        _result= 'seller';        
+          break;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
+
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
       elevation: 8.0,
       child: Container(
-        height: _authMode == AuthMode.Signup ? 320 : 260,
+        height: _authMode == AuthMode.Signup ? 400 : 330,
         constraints:
             BoxConstraints(minHeight: _authMode == AuthMode.Signup ? 320 : 260),
         width: deviceSize.width * 0.75,
@@ -243,6 +290,43 @@ class _AuthCardState extends State<AuthCard> {
                           }
                         : null,
                   ),
+                  SizedBox(
+                    height: 15,
+                   ),
+                  // Row(
+                  //     mainAxisAlignment: MainAxisAlignment.start,
+                  //     children: <Widget>[
+                  //       new Radio(
+                  //         value: 0,
+                  //         groupValue: _radioValue,
+                  //         onChanged: (newValue) {
+                  //          _handleRadioValueChange(_radioValue);
+                  //           setState(() {
+                  //             _authData['user'] = _result;
+                  //           });
+                  //         },
+                  //       ),
+                  //       new Text('Customer'),
+                  //       new Radio(
+                  //         value: 1,
+                  //         groupValue: _radioValue,
+                  //        onChanged: (newValue) {
+                  //          _handleRadioValueChange(_radioValue);
+                  //           setState(() {
+                  //             _authData['user'] = _result;
+                  //           });
+                  //         },
+                  //       ),
+                  //       new Text('Seller'),
+                  //     ],
+                  //   ),
+                  TextFormField(
+                  decoration: InputDecoration(labelText: 'customer/seller'),
+                  onSaved: (value) {
+                    _authData['user'] = value;
+                  },
+                  ),
+
                 SizedBox(
                   height: 20,
                 ),

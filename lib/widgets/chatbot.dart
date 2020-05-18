@@ -1,43 +1,45 @@
 import 'package:flutter/material.dart';
+import '../widgets/app_drawer.dart';
 import 'package:watson_assistant_v2/watson_assistant_v2.dart';
-
-void main() => runApp(Chatbot());
 
 class Chatbot extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primarySwatch: Colors.deepOrange,
+        accentColor: Colors.deepOrange[100],
+        fontFamily: 'Lato',
       ),
-      home: MyHomePage(title: 'Optima Watson Assistant'),
+      home: ChatScreen(title: 'Virtual Assistance'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class ChatScreen extends StatefulWidget {
+  ChatScreen({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _ChatScreenState createState() => _ChatScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _ChatScreenState extends State<ChatScreen> {
   String _text;
   WatsonAssistantV2Credential credential = WatsonAssistantV2Credential(
     version: '2019-02-28',
     username: 'apikey',
     apikey: 'sP0X5MXVpULgpKmsDOunzRTLmTLxpN5Z-l3by3QMEWPY',
     assistantID: '5fc0f0f3-fe4f-41ee-80a6-38583233d418',
-    url: 'https://api.eu-gb.assistant.watson.cloud.ibm.com/instances/4db8f948-2e57-4cf2-ba99-22261f80958f/v2',
+    url:
+        'https://api.eu-gb.assistant.watson.cloud.ibm.com/instances/4db8f948-2e57-4cf2-ba99-22261f80958f/v2',
   );
 
   WatsonAssistantApiV2 watsonAssistant;
   WatsonAssistantResponse watsonAssistantResponse;
   WatsonAssistantContext watsonAssistantContext =
-  WatsonAssistantContext(context: {});
+      WatsonAssistantContext(context: {});
 
   final myController = TextEditingController();
 
@@ -63,8 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Optima Watson Chatbot'),
-        centerTitle: true,
+        title: Text('Virtual Assistance'),
         actions: <Widget>[
           IconButton(
             icon: Icon(
@@ -79,52 +80,56 @@ class _MyHomePageState extends State<MyHomePage> {
           )
         ],
       ),
+      //drawer: AppDrawer(),
       body: Scaffold(
         backgroundColor: Colors.white,
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: <Widget>[
-              TextField(
-                controller: myController,
-                decoration: InputDecoration(
-                  hintText: 'Your Input to the chatbot',
-                  contentPadding:
-                  EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide:
-                    BorderSide(color: Colors.redAccent, width: 1.0),
-                    borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide:
-                    BorderSide(color: Colors.redAccent, width: 2.0),
-                    borderRadius: BorderRadius.all(Radius.circular(32.0)),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10.0),
+                child: Text(
+                  _text != null ? '$_text' : 'How can I help you?',
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
               ),
               SizedBox(
-                height: 8.0,
+                height: 50.0,
               ),
-              Text(
-                _text != null ? '$_text' : 'Watson Response Here',
-                style: Theme.of(context).textTheme.headline6,
+              TextField(
+                autocorrect: true,
+                controller: myController,
+                decoration: InputDecoration(
+                  hintText: 'Ask me anything!',
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.deepOrange,
+                    ),
+                  ),
+                  suffixIcon: IconButton(
+                      color: Theme.of(context).primaryColor,
+                      icon: Icon(Icons.send),
+                      onPressed: _callWatsonAssistant),
+                ),
               ),
               SizedBox(
-                height: 24.0,
+                height: 70.0,
               ),
             ],
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _callWatsonAssistant,
-        child: Icon(Icons.send),
       ),
     );
   }

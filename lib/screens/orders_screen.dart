@@ -6,6 +6,10 @@ import '../widgets/order_item.dart';
 import '../widgets/app_drawer.dart';
 
 class OrdersScreen extends StatelessWidget {
+
+  final String user;
+  OrdersScreen(this.user);
+
   static const routeName = '/orders';
 
   @override
@@ -16,7 +20,7 @@ class OrdersScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Your Orders'),
       ),
-      drawer: AppDrawer(),
+      drawer: AppDrawer(user),
       body: FutureBuilder(
         future: Provider.of<Orders>(context, listen: false).fetchAndSetOrders(),
         builder: (ctx, dataSnapshot) {

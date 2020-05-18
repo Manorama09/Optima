@@ -2,13 +2,13 @@ import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
-
 import '../models/http_exception.dart';
 
 class Auth with ChangeNotifier {
   String _token;
   DateTime _expiryDate;
   String _userId;
+  String _user;
 
   bool get isAuth {
     return token != null;
@@ -27,9 +27,12 @@ class Auth with ChangeNotifier {
     return _userId;
   }
 
+  String get user{
+    return _user;
+  }
+
   Future<void> _authenticate(
-      String email, String password, String urlSegment) async {
-        
+      String email, String password, String urlSegment, String user) async {
     final url ='https://identitytoolkit.googleapis.com/v1/accounts:$urlSegment?key=AIzaSyBMbdeCerMM19JDZBELLno7oUgdb8aYems';
     try {
       final response = await http.post(
@@ -38,6 +41,7 @@ class Auth with ChangeNotifier {
           {
             'email': email,
             'password': password,
+            'user':user,
             'returnSecureToken': true,
           },
         ),
@@ -55,24 +59,27 @@ class Auth with ChangeNotifier {
           ),
         ),
       );
+      print("hello"+ _userId);
+      _user=user;
       notifyListeners();
     } catch (error) {
       throw error;
     }
   }
 
-  Future<void> signup(String email, String password) async {
-    return _authenticate(email, password, 'signUp');
+  Future<void> signup(String email, String password,String user) async {
+    return _authenticate(email, password, 'signUp',user);
   }
 
-  Future<void> login(String email, String password) async {
-    return _authenticate(email, password, 'signInWithPassword');
+  Future<void> login(String email, String password,String user) async {
+    return _authenticate(email, password, 'signInWithPassword',user);
   }
 
   void logout() {
     _token = null;
     _userId = null;
     _expiryDate = null;
+    _user=null;
     notifyListeners();
   }
 }

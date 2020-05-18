@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/product.dart';
 import '../providers/products.dart';
-import 'VisualRec.dart';
+import './visual_recognition_screen.dart';
 class EditProductScreen extends StatefulWidget {
   static const routeName = '/edit-product';
 
