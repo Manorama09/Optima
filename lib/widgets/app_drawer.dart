@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:optima/screens/auth_screen.dart.dart';
 import '../screens/user_products_screen.dart';
 import '../screens/orders_screen.dart';
 import '../providers/auth.dart';
@@ -50,7 +51,7 @@ class AppDrawer extends StatelessWidget {
           leading: Icon(Icons.exit_to_app),
           title: Text('Logout'),
           onTap: () {
-            Navigator.of(context).pop();
+            Navigator.of(context).pushNamed(AuthScreen.routeName);
             Provider.of<Auth>(context,listen: false).logout();
           }),
     ]

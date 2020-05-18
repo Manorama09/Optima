@@ -1,6 +1,7 @@
 import 'dart:async';
 //import 'main.dart';
 import 'package:flutter/material.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 void main() => runApp(SplashScreen());
 
@@ -13,7 +14,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-  //  Timer(Duration(seconds:2), () => MyApp());
+    //Timer(Duration(seconds:2), () => MyApp());
   }
 
   @override

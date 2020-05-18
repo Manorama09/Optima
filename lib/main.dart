@@ -12,6 +12,7 @@ import './screens/edit_product_screen.dart';
 import './providers/auth.dart';
 import './providers/users.dart';
 //import './splash_screen.dart';
+import './screens/welcome_screen.dart';
 import 'screens/auth_screen.dart.dart';
 
 void main() => runApp(MyApp());
