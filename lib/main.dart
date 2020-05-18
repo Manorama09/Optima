@@ -12,6 +12,8 @@ import './screens/user_products_screen.dart';
 import './screens/edit_product_screen.dart';
 import './providers/auth.dart';
 import 'package:optima/screens/Welcome_screen.dart';
+import 'screens/auth_screen.dart.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -32,12 +34,12 @@ class MyApp extends StatelessWidget {
             create: (ctx) => Cart(),
           ),
           ChangeNotifierProxyProvider<Auth, Orders>(
-            update: (ctx, auth, previousOrders) 
+            update: (ctx, auth, previousOrders)
             => Orders(
               auth.token,
               auth.userId,
-              previousOrders == null 
-              ? [] 
+              previousOrders == null
+              ? []
               : previousOrders.orders
               ),
           ),
@@ -50,8 +52,11 @@ class MyApp extends StatelessWidget {
                 accentColor: Colors.deepOrange[100],
                 fontFamily: 'Lato',
               ),
-              home: auth.isAuth ? ProductsOverviewScreen() : AuthScreen(),
+
+//                home: WelcomeInit(),
+              home: auth.isAuth ? ProductsOverviewScreen() : WelcomeScreen(),
               routes: {
+                WelcomeScreen.routeName: (ctx) => WelcomeScreen(),
                 AuthScreen.routeName: (ctx) => AuthScreen(),
                 CartScreen.routeName: (ctx) => CartScreen(),
                 ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
@@ -62,3 +67,4 @@ class MyApp extends StatelessWidget {
         ));
   }
 }
+
