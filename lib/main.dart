@@ -12,9 +12,9 @@ import './screens/edit_product_screen.dart';
 import './providers/auth.dart';
 import './providers/users.dart';
 //import './splash_screen.dart';
-// import './screens/Welcome_screen.dart';
+import 'screens/auth_screen.dart.dart';
 
-void main()=>runApp(MyApp());
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
@@ -34,12 +34,12 @@ class MyApp extends StatelessWidget {
             create: (ctx) => Cart(),
           ),
           ChangeNotifierProxyProvider<Auth, Orders>(
-            update: (ctx, auth, previousOrders) 
+            update: (ctx, auth, previousOrders)
             => Orders(
               auth.token,
               auth.userId,
-              previousOrders == null 
-              ? [] 
+              previousOrders == null
+              ? []
               : previousOrders.orders
               ),
           ),
@@ -59,9 +59,10 @@ class MyApp extends StatelessWidget {
                 accentColor: Colors.deepOrange,
                 fontFamily: 'Lato',
               ),
-              home: 
-              auth.isAuth ? ProductsOverviewScreen(auth.user) : AuthScreen(),
+
+              home: auth.isAuth ? ProductsOverviewScreen(auth.user) : WelcomeScreen(),
               routes: {
+                WelcomeScreen.routeName: (ctx) => WelcomeScreen(),
                 AuthScreen.routeName: (ctx) => AuthScreen(),
                 CartScreen.routeName: (ctx) => CartScreen(),
                 OrdersScreen.routeName: (ctx) => OrdersScreen(auth.user),
@@ -71,3 +72,4 @@ class MyApp extends StatelessWidget {
         ));
   }
 }
+
