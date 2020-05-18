@@ -269,7 +269,7 @@ class _AuthCardState extends State<AuthCard> {
   };
   var _isLoading = false;
   final _passwordController = TextEditingController();
-  String _result ='';
+  String result ='';
 
   void _showErrorDialog(String message) {
     showDialog(
@@ -382,15 +382,15 @@ class _AuthCardState extends State<AuthCard> {
 
   int _radioValue=0;
 
-  void _handleRadioValueChange(int value) {
+  String _handleRadioValueChange(int value) {
     setState(() {
       _radioValue = value; 
       switch (_radioValue) {
         case 0:
-        _result= 'customer';
+         return 'customer';
           break;
         case 1:
-        _result= 'seller';        
+        return 'seller';        
           break;
       }
     });
@@ -465,10 +465,10 @@ class _AuthCardState extends State<AuthCard> {
                   //         value: 0,
                   //         groupValue: _radioValue,
                   //         onChanged: (newValue) {
-                  //          _handleRadioValueChange(_radioValue);
-                  //           setState(() {
-                  //             _authData['user'] = _result;
+                  //            setState(() {
+                  //             _authData['user'] = _handleRadioValueChange(0);
                   //           });
+                  //           print(result);
                   //         },
                   //       ),
                   //       new Text('Customer'),
@@ -476,9 +476,8 @@ class _AuthCardState extends State<AuthCard> {
                   //         value: 1,
                   //         groupValue: _radioValue,
                   //        onChanged: (newValue) {
-                  //          _handleRadioValueChange(_radioValue);
                   //           setState(() {
-                  //             _authData['user'] = _result;
+                  //             _authData['user'] = _handleRadioValueChange(1);
                   //           });
                   //         },
                   //       ),
@@ -491,7 +490,6 @@ class _AuthCardState extends State<AuthCard> {
                     _authData['user'] = value;
                   },
                   ),
-
                 SizedBox(
                   height: 20,
                 ),
