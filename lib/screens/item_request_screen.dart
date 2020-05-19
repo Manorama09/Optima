@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../providers/item.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth.dart';
-
+import 'visual_recognition_screen.dart';
 class ItemRequestScreen extends StatefulWidget {
   static const routeName = '/request-product';
   @override
@@ -126,6 +126,21 @@ class _ItemRequestScreen extends State<ItemRequestScreen> {
                         ),
                       ),
                     ),
+                    SizedBox(
+                        height:50
+                    ),
+                    FloatingActionButton.extended(
+                      backgroundColor: Colors.red,
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => ScreenVisualRecognition()));
+                      },
+                      icon: Icon(
+                        Icons.add,
+                      ),
+                      label : Text("Use Watson Visual Recognition"),
+                    ),
+
                   ],
                 ),
               ),
