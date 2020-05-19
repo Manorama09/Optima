@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:optima/screens/item_request_screen.dart';
 import './screens/auth_screen.dart.dart';
 import './screens/cart_screen.dart';
 import 'package:provider/provider.dart';
@@ -14,6 +15,7 @@ import './providers/users.dart';
 //import './splash_screen.dart';
 import './screens/welcome_screen.dart';
 import 'screens/auth_screen.dart.dart';
+import './providers/item.dart';
 
 void main() => runApp(MyApp());
 
@@ -51,6 +53,9 @@ class MyApp extends StatelessWidget {
                 auth.userId,
                 previousUsers == null ? [] : previousUsers.users),
           ),
+          ChangeNotifierProvider(
+            create: (ctx) => Item(),
+          ),
         ],
         child: Consumer<Auth>(
           builder: (ctx, auth, _) => MaterialApp(
@@ -63,6 +68,7 @@ class MyApp extends StatelessWidget {
 
               home: auth.isAuth ? ProductsOverviewScreen(auth.user) : WelcomeScreen(),
               routes: {
+                ItemRequestScreen.routeName:(ctx) => ItemRequestScreen(),
                 WelcomeScreen.routeName: (ctx) => WelcomeScreen(),
                 AuthScreen.routeName: (ctx) => AuthScreen(),
                 CartScreen.routeName: (ctx) => CartScreen(),

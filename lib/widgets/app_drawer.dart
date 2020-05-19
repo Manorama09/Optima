@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:optima/screens/auth_screen.dart.dart';
+import 'package:optima/screens/item_request_screen.dart';
 import '../screens/user_products_screen.dart';
 import '../screens/orders_screen.dart';
 import '../providers/auth.dart';
@@ -25,19 +26,27 @@ class AppDrawer extends StatelessWidget {
           ),
         ),
       ),
-      if(user.startsWith('c'))
+      if(!user.startsWith('s'))
       ListTile(
           leading: Icon(Icons.shopping_cart),
           title: Text('Shop'),
           onTap: () {
             Navigator.of(context).pushNamed('/');
           }),
-      if(user.startsWith('c'))
+      if(!user.startsWith('s'))
       ListTile(
           leading: Icon(Icons.payment),
           title: Text('Orders'),
           onTap: () {
             Navigator.of(context).pushNamed(OrdersScreen.routeName);
+          }
+          ),
+          if(!user.startsWith('s'))
+      ListTile(
+          leading: Icon(Icons.note_add),
+          title: Text('Request Item'),
+          onTap: () {
+            Navigator.of(context).pushNamed(ItemRequestScreen.routeName);
           }
           ),
           if(user.startsWith('s'))

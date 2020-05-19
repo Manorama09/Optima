@@ -12,6 +12,4 @@ class User with ChangeNotifier {
     @required this.email,
     @required this.userType,
   });
-}
-
-  
+ }
