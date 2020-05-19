@@ -3,8 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 class Item with ChangeNotifier {
- String name;
- Item(this.name);
+    String name;
+    Item();
 
     Future<void> addItem(String token,String item) async {
     final url =

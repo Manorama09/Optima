@@ -23,9 +23,9 @@ class Analytics with ChangeNotifier {
       return;
     }
     extractedData.forEach((itemId, itemData) {
-      requiredItems.add(
-        Item(itemData['name']).toString(),
-      );
+      // requiredItems.add(
+      //   Item.name =itemData['name'].toString(),
+      // );
     });
     _items = requiredItems.reversed.toList();
     notifyListeners();
