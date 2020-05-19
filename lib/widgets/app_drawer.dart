@@ -5,7 +5,7 @@ import '../screens/user_products_screen.dart';
 import '../screens/orders_screen.dart';
 import '../providers/auth.dart';
 import 'package:provider/provider.dart';
-
+import 'package:optima/screens/AnalyticsOutput.dart';
 class AppDrawer extends StatelessWidget {
 
   final String user;
@@ -56,6 +56,15 @@ class AppDrawer extends StatelessWidget {
           onTap: () {
             Navigator.of(context).pushNamed(UserProductsScreen.routeName);
           }),
+        ListTile(
+            leading: Icon(Icons.edit),
+            title: Text('View Analytics'),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  new MaterialPageRoute(
+                      builder: (context) => new LoadFirebaseStorageImage()));
+            }),
       ListTile(
           leading: Icon(Icons.exit_to_app),
           title: Text('Logout'),
