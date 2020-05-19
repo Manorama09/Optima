@@ -22,8 +22,8 @@ class ScreenVisualRecognition extends StatefulWidget {
 class _ScreenVisualRecognition extends State<ScreenVisualRecognition> {
   IamOptions options;
   File _image;
-  String _text = "Loading";
-  String _text2 = "Init";
+  String _text = "Obtain Image Description";
+  String _text2 = "";
   String url;
 
   Future<Null> getOptions() async {
@@ -100,7 +100,8 @@ class _ScreenVisualRecognition extends State<ScreenVisualRecognition> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("IBM Watson Visual Recognition"),
+        title: Text("IBM Visual Recognition"),
+        backgroundColor: Colors.red,
       ),
       body: new SingleChildScrollView(
         child: new Container(
@@ -109,57 +110,78 @@ class _ScreenVisualRecognition extends State<ScreenVisualRecognition> {
           child: new Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              SizedBox(height: 25.0,),
               _image == null
-                  ? new Text('No image selected')
+                  ? new Text('',
+                style: TextStyle(
+                    fontSize: 30.0
+                ),)
                   : new Image.file(
                 _image,
                 height: 300.0,
                 width: 300.0,
               ),
-              new RaisedButton(
-                child: const Text('Click a photo'),
+              SizedBox(height: 50.0,),
+              new FloatingActionButton.extended(
+                label:Text(
+                    'Click a photo',
+                  style: TextStyle(
+                    fontSize: 15.0,
+                  ),
+                  ),
+                backgroundColor: Colors.red,
+                icon: Icon(Icons.add_a_photo),
                 onPressed: getPhoto,
-              ),
+                ),
+
+
+              SizedBox(height: 50.0,),
               new Text("or"),
+              SizedBox(height: 50.0,),
+
               new Container(
                 margin: const EdgeInsets.all(5.0),
                 child: new TextField(
-                  decoration: new InputDecoration(labelText: "Enter Url Image"),
+                  decoration: new InputDecoration(labelText: "Enter Image URL"),
                   onChanged: (String value) {
                     this.url = value.toString();
                   },
                 ),
               ),
+              SizedBox(height: 25.0,),
+
               new Container(
                 margin: const EdgeInsets.all(5.0),
                 child: new Text(_text2,
                     style: new TextStyle(
                         fontSize: 14.0, fontWeight: FontWeight.bold)),
               ),
+
               new Container(
                 margin: const EdgeInsets.all(5.0),
                 child: new Text(_text),
               ),
               new Container(
                 margin: const EdgeInsets.all(10.0),
-                child: new RaisedButton(
-                  child: const Text('Visual Recognition File'),
-                  color: Theme.of(context).accentColor,
-                  elevation: 4.0,
-                  splashColor: Colors.red,
-                  textColor: Colors.white,
+                child: new FloatingActionButton.extended(
+                  heroTag: "bt1",
+                  backgroundColor: Colors.red,
+                  icon: Icon(Icons.cloud_upload),
+                  label: Text('Analyze Image File'),
                   onPressed: visualRecognitionFile,
                 ),
               ),
+
               new Container(
                 margin: const EdgeInsets.all(10.0),
-                child: new RaisedButton(
-                  child: const Text('Visual Recognition Url'),
-                  color: Theme.of(context).accentColor,
-                  elevation: 4.0,
-                  splashColor: Colors.red,
-                  textColor: Colors.white,
-                  onPressed: visualRecognitionUrl,
+                child: new FloatingActionButton.extended(
+
+                  backgroundColor: Colors.red,
+                  heroTag: "btn2",
+                  onPressed:visualRecognitionUrl,
+                  icon: Icon(Icons.cloud_upload),
+                  label: Text('Analyze URL'),
+
                 ),
               ),
 
