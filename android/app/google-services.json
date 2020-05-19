@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "983069502831",
+    "firebase_url": "https://optima-d2749.firebaseio.com",
+    "project_id": "optima-d2749",
+    "storage_bucket": "optima-d2749.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:983069502831:android:c8da802ec0ad2817658c9a",
+        "android_client_info": {
+          "package_name": "com.abhisheksingh2412.optimaibmhack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "983069502831-1lngoa6imbuhcs2dkl61dujegpctr7ru.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcrE9FYCzXR8gtAcnuv1e6MkKYRmPvgyc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "983069502831-1lngoa6imbuhcs2dkl61dujegpctr7ru.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:983069502831:android:c39dc6cd64318d2d658c9a",
+        "android_client_info": {
+          "package_name": "com.example.optima"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "983069502831-1lngoa6imbuhcs2dkl61dujegpctr7ru.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcrE9FYCzXR8gtAcnuv1e6MkKYRmPvgyc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "983069502831-1lngoa6imbuhcs2dkl61dujegpctr7ru.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
