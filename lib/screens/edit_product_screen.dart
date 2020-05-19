@@ -196,17 +196,16 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     SizedBox(
                       height: 100.0,
                     ),
-                    FloatingActionButton(
-                      backgroundColor: Colors.redAccent,
+                    FloatingActionButton.extended(
+                      backgroundColor: Colors.red,
                       onPressed: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) => ScreenVisualRecognition()));
                       },
-                      child: Icon(
+                      icon: Icon(
                         Icons.add,
-
                       ),
-                      heroTag: "Watson Visual Recognition",
+                      label : Text("Use Watson Visual Recognition"),
                     ),
 
 
