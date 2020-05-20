@@ -5,7 +5,7 @@ import '../screens/user_products_screen.dart';
 import '../screens/orders_screen.dart';
 import '../providers/auth.dart';
 import 'package:provider/provider.dart';
-import 'package:optima/screens/AnalyticsOutput.dart';
+import 'package:optima/screens/analytics_screen.dart';
 class AppDrawer extends StatelessWidget {
 
   final String user;
@@ -16,14 +16,11 @@ class AppDrawer extends StatelessWidget {
     return Drawer(
       child: Column(children: <Widget>[
       UserAccountsDrawerHeader(
-        accountName: Text('Hello there!') ,
-        accountEmail: Text("email@email.com"),
+        accountName: Text('Hello there!', style: TextStyle(fontSize: 30),) ,
+         //accountEmail: Text(""),
         currentAccountPicture: CircleAvatar(
-          backgroundColor: Colors.white,
-          child: Text(
-            "U",
-            style: TextStyle(fontSize: 40.0),
-          ),
+          backgroundColor:Theme.of(context).primaryColor,
+          child: Image.asset('assets/images/optima_logo.png')
         ),
       ),
       if(!user.startsWith('s'))
@@ -56,8 +53,9 @@ class AppDrawer extends StatelessWidget {
           onTap: () {
             Navigator.of(context).pushNamed(UserProductsScreen.routeName);
           }),
+          if(user.startsWith('s'))
         ListTile(
-            leading: Icon(Icons.edit),
+            leading: Icon(Icons.scatter_plot),
             title: Text('View Analytics'),
             onTap: () {
               Navigator.push(

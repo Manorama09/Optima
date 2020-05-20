@@ -7,7 +7,6 @@ import '../providers/orders.dart' as ord;
 
 class OrderItem extends StatefulWidget {
   final ord.OrderItem order;
-
   OrderItem(this.order);
 
   @override
@@ -20,18 +19,22 @@ class _OrderItemState extends State<OrderItem> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(10),
+      margin: EdgeInsets.symmetric(horizontal:10,vertical:5),
       child: Column(
         children: <Widget>[
           ListTile(
             title: Text(
               '₹${widget.order.amount}',
-              style: TextStyle(
-                fontSize: 20,
-              ),
+               style:TextStyle(
+                        color: Theme.of(context).primaryColor,
+                        fontSize: 25,
+                        fontWeight: FontWeight.w400
+                      ) ,
             ),
-            subtitle: Text(
-              DateFormat('dd/MM/yyyy hh:mm').format(widget.order.dateTime),
+            subtitle: Text('Ordered on: '+
+              DateFormat('dd/MM/yyyy').format(widget.order.dateTime)+
+              ' at: '+
+              DateFormat('hh:mm').format(widget.order.dateTime),
             ),
             trailing: IconButton(
               icon: Icon(_expanded ? Icons.expand_less : Icons.expand_more),
@@ -45,7 +48,7 @@ class _OrderItemState extends State<OrderItem> {
           if (_expanded)
             Container(
               padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-              height: min(widget.order.products.length * 40.0 + 5, 90),
+              height: widget.order.products.length * 20.0 +40,
               child: ListView(
                 children: widget.order.products
                     .map(
@@ -56,11 +59,12 @@ class _OrderItemState extends State<OrderItem> {
                             prod.title,
                             style: TextStyle(
                               fontSize: 16,
-                              fontWeight: FontWeight.bold,
+                              color: Colors.black87,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
                           Text(
-                            '${prod.quantity}x ₹${prod.price}',
+                            '${prod.quantity} x ₹${prod.price}',
                             style: TextStyle(
                               fontSize: 16,
                               color: Colors.grey,

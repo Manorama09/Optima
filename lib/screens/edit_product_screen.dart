@@ -97,7 +97,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Product'),
+        backgroundColor: Colors.white,
+        elevation: 0.0,
+        iconTheme: new IconThemeData(color: Colors.grey),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.save),
@@ -106,6 +108,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
         ],
       ),
       body: _isLoading
+
           ? Center(
               child: CircularProgressIndicator(),
             )
@@ -115,6 +118,31 @@ class _EditProductScreenState extends State<EditProductScreen> {
                 key: _form,
                 child: ListView(
                   children: <Widget>[
+                    Text('Manage',
+                style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                  fontFamily: "lineto",
+                  fontSize: 70,
+                  fontWeight: FontWeight.w600
+                ),),
+                SizedBox(height: 5,),
+                Text('Product Details',
+                style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                  fontFamily: "lineto",
+                  fontSize: 38,
+                  fontWeight: FontWeight.w600
+                ),),
+                SizedBox(
+                  height: 30,
+                ),
+                Text('Enter your product details below:',
+              style: TextStyle(
+                color: Colors.black54,
+                fontFamily: "lineto",
+                fontSize: 17,
+                fontWeight: FontWeight.w400
+              ),),
                     TextFormField(
                       initialValue: _initValues['title'],
                       decoration: InputDecoration(labelText: 'Title'),
@@ -171,7 +199,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     TextFormField(
                       initialValue: _initValues['description'],
                       decoration: InputDecoration(labelText: 'Description'),
-                      maxLines: 3,
+                      maxLines: 2,
                       keyboardType: TextInputType.multiline,
                       focusNode: _descriptionFocusNode,
                       validator: (value) {
@@ -193,21 +221,43 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         );
                       },
                     ),
-                    SizedBox(
-                      height: 100.0,
+                    SizedBox(height: 15),
+                 new Center(
+                  child: Text('OR',
+                  style: TextStyle(color: Colors.grey,
+                  fontSize: 20,
+                  ),
+                  )
+                ),
+                SizedBox(height: 15),
+                     Text('You can also upload a photo instead!',
+              style: TextStyle(
+                color: Colors.black54,
+                fontFamily: "lineto",
+                fontSize: 17,
+                fontWeight: FontWeight.w400
+              ),),
+              SizedBox(
+                        height:MediaQuery.of(context).size.height/100
                     ),
-                    FloatingActionButton.extended(
-                      backgroundColor: Colors.red,
-                      onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => ScreenVisualRecognition()));
-                      },
-                      icon: Icon(
-                        Icons.add,
+                    Container(
+                      width: double.infinity,
+                      height: 50,
+                      child: FlatButton(
+                        color: Theme.of(context).primaryColor,
+                        onPressed: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => ScreenVisualRecognition()));
+                        },
+                        child: Text('Upload a Photo',
+                        style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: "lineto",
+                  fontSize: 23,
+                  fontWeight: FontWeight.w600
+              ),),
                       ),
-                      label : Text("Use Watson Visual Recognition"),
                     ),
-
 
 
                   ],

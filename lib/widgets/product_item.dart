@@ -13,24 +13,10 @@ class ProductItem extends StatelessWidget {
     final authData = Provider.of<Auth>(context, listen: false);
 
     return Container(
-      height: 90.0,
-      margin: EdgeInsets.all(10.0),
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey,
-              blurRadius: 1, // soften the shadow
-              spreadRadius: 1, //extend the shadow
-              offset: Offset(
-                0.5, // Move to right 10  horizontally
-                0.5, // Move to bottom 10 Vertically
-              ),
-            ),
-          ]),
+      height: 70.0,
+      //margin: EdgeInsets.all(10.0),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 3),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
@@ -44,25 +30,30 @@ class ProductItem extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 22.0,
                         color: Colors.black,
-                        fontWeight: FontWeight.bold),
+                        fontFamily: "lineto",
+                        fontWeight: FontWeight.w400),
                   ),
-                  SizedBox(
-                    height: 3.0,
-                  ),
+                 SizedBox(
+                   height: 1,
+                 ),
                   Text(
-                    'Price: ₹' + (product.price).toString(),
-                    style: new TextStyle(fontSize: 15.0, color: Colors.black),
+                    '₹' + (product.price).toString(),
+                    style: new TextStyle(
+                      fontSize: 15.0, 
+                      color: Colors.black54,
+                      fontFamily: "lineto",
+                        fontWeight: FontWeight.w800
+                        ),
                   ),
-                  SizedBox(
-                    height: 3.0,
-                  ),
+                  
                   Text(
                     product.description,
-                    style: TextStyle(fontSize: 10.0, color: Colors.black),
+                    style: TextStyle(fontSize: 10.0, color: Colors.black54,fontFamily: "lineto",
+                        ),
                   ),
                 ])),
             new Padding(
-              padding: new EdgeInsets.only(left: 10.0, right: 10.0),
+              padding: new EdgeInsets.only(right: 10.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -75,7 +66,7 @@ class ProductItem extends StatelessWidget {
                             : Icons.favorite_border,
                         size: 30,
                       ),
-                      color: Colors.red,
+                      color: Colors.red[300],
                       onPressed: () {
                         product.toggleFavoriteStatus(
                             authData.token, authData.userId);
@@ -83,11 +74,11 @@ class ProductItem extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    width: 5,
+                    width: 10,
                   ),
                   IconButton(
                     icon: Icon(
-                      Icons.shopping_cart,
+                      Icons.add_shopping_cart,
                       size: 30,
                     ),
                     onPressed: () {
@@ -105,7 +96,7 @@ class ProductItem extends StatelessWidget {
                         ),
                       );
                     },
-                    color: Colors.lightGreen,
+                    color: Colors.blueGrey,
                   ),
                 ],
               ),
@@ -113,6 +104,7 @@ class ProductItem extends StatelessWidget {
           ],
         ),
       ),
+      
     );
 
     // return ClipRRect(

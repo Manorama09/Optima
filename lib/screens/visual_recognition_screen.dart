@@ -99,94 +99,173 @@ class _ScreenVisualRecognition extends State<ScreenVisualRecognition> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("IBM Visual Recognition"),
-        backgroundColor: Colors.red,
+       appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0.0,
+        iconTheme: new IconThemeData(color: Colors.grey),
       ),
       body: new SingleChildScrollView(
         child: new Container(
           // Center is a layout widget. It takes a single child and positions it
           // in the middle of the parent.
-          child: new Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              SizedBox(height: 25.0,),
-              _image == null
-                  ? new Text('',
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal:15.0),
+            child: new Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                SizedBox(
+                  height:MediaQuery.of(context).size.height/20,
+                ),
+                Text('Visual',
                 style: TextStyle(
-                    fontSize: 30.0
-                ),)
-                  : new Image.file(
-                _image,
-                height: 300.0,
-                width: 300.0,
-              ),
-              SizedBox(height: 50.0,),
-              new FloatingActionButton.extended(
-                label:Text(
-                    'Click a photo',
-                  style: TextStyle(
-                    fontSize: 15.0,
+                  color: Theme.of(context).primaryColor,
+                  fontFamily: "lineto",
+                  fontSize: 70,
+                  fontWeight: FontWeight.w600
+                ),),
+                Text('Recognition',
+                style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                  fontFamily: "lineto",
+                  fontSize: 40,
+                  fontWeight: FontWeight.w600
+                ),),
+                
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal:MediaQuery.of(context).size.width/10,vertical: 5),
+                  child: _image == null
+                      ? new Text('',
+                    style: TextStyle(
+                        fontSize: 30.0
+                    ),)
+                      : new Image.file(
+                    _image,
+                    height: 300.0,
+                    width: 300.0,
                   ),
+                ),
+                 new Container(
+                  margin: const EdgeInsets.all(5.0),
+                  child: Text('Step 1:',
+                  style: TextStyle(color: Colors.grey),),
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal:5.0),
+                      width: double.infinity,
+                      height: 50,
+                      child: FlatButton(
+                        color: Theme.of(context).primaryColor,
+                        onPressed: getPhoto,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children:<Widget>[
+                            SizedBox(
+                              width:50
+                            ),
+                            IconButton(
+                              color: Colors.white,
+                              icon: Icon(Icons.add_a_photo), onPressed: getPhoto) ,
+                            Text('Click a Photo',
+                          style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: "lineto",
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600
+              ),),
+                          ],),
+                      ),
+                    ),
+                    new Container(
+                  margin: const EdgeInsets.all(5.0),
+                  child: Text('Step 2:',
+                  style: TextStyle(color: Colors.grey),),
+                ),
+                new Container(
+                  margin: const EdgeInsets.symmetric(horizontal:5.0),
+                  child: FlatButton(
+                        color: Theme.of(context).primaryColor,
+                        onPressed: visualRecognitionFile,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children:<Widget>[
+                            SizedBox(
+                              width:26
+                            ),
+                            IconButton(
+                              color: Colors.white,
+                              icon: Icon(Icons.cloud_upload), onPressed: visualRecognitionFile) ,
+                            Text('Analyze the image uploaded',
+                          style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: "lineto",
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600
+              ),
+              ),
+                          ],),
+                      ),    
+                ),
+                SizedBox(height: 15),
+                 new Center(
+                  child: Text('OR',
+                  style: TextStyle(color: Colors.grey,
+                  fontSize: 20,
                   ),
-                backgroundColor: Colors.red,
-                icon: Icon(Icons.add_a_photo),
-                onPressed: getPhoto,
+                  )
+                ),
+                new Container(
+                  margin: const EdgeInsets.symmetric(horizontal:5.0),
+                  child: Text('Step 1:',
+                  style: TextStyle(color: Colors.grey),),
+                ),
+                new Container(
+                  margin: const EdgeInsets.symmetric(horizontal:5.0),
+                  child: new TextField(
+                    decoration: new InputDecoration(labelText: " Enter Image URL"),
+                    onChanged: (String value) {
+                      this.url = value.toString();
+                    },
+                  ),
+                ),
+                SizedBox(
+                  height: 3,
+                ),
+                new Container(
+                  margin: const EdgeInsets.all(5.0),
+                  child: Text('Step 2:',
+                  style: TextStyle(color: Colors.grey),),
+                ),               
+
+                new Container(
+                  margin: const EdgeInsets.all(5.0),
+                  child: FlatButton(
+                        color: Theme.of(context).primaryColor,
+                        onPressed: visualRecognitionUrl,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children:<Widget>[
+                            SizedBox(
+                              width:40
+                            ),
+                            IconButton(
+                              color: Colors.white,
+                              icon: Icon(Icons.cloud_upload), onPressed: visualRecognitionUrl) ,
+                            Text('Analyze the image URL',
+                          style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: "lineto",
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600
+              ),),
+                          ],),
+                      ), 
+                  
                 ),
 
 
-              SizedBox(height: 50.0,),
-              new Text("or"),
-              SizedBox(height: 50.0,),
-
-              new Container(
-                margin: const EdgeInsets.all(5.0),
-                child: new TextField(
-                  decoration: new InputDecoration(labelText: "Enter Image URL"),
-                  onChanged: (String value) {
-                    this.url = value.toString();
-                  },
-                ),
-              ),
-              SizedBox(height: 25.0,),
-
-              new Container(
-                margin: const EdgeInsets.all(5.0),
-                child: new Text(_text2,
-                    style: new TextStyle(
-                        fontSize: 14.0, fontWeight: FontWeight.bold)),
-              ),
-
-              new Container(
-                margin: const EdgeInsets.all(5.0),
-                child: new Text(_text),
-              ),
-              new Container(
-                margin: const EdgeInsets.all(10.0),
-                child: new FloatingActionButton.extended(
-                  heroTag: "bt1",
-                  backgroundColor: Colors.red,
-                  icon: Icon(Icons.cloud_upload),
-                  label: Text('Analyze Image File'),
-                  onPressed: visualRecognitionFile,
-                ),
-              ),
-
-              new Container(
-                margin: const EdgeInsets.all(10.0),
-                child: new FloatingActionButton.extended(
-
-                  backgroundColor: Colors.red,
-                  heroTag: "btn2",
-                  onPressed:visualRecognitionUrl,
-                  icon: Icon(Icons.cloud_upload),
-                  label: Text('Analyze URL'),
-
-                ),
-              ),
-
-
-            ],
+              ],
+            ),
           ),
         ),
       ),

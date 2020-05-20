@@ -13,7 +13,12 @@ class UserProductItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final scaffold = Scaffold.of(context);
     return ListTile(
-      title: Text(title),
+      title: Text(title,
+      style: TextStyle(
+color: Colors.black87,
+        fontWeight: FontWeight.w500,
+      fontSize: 18,
+      ),),
       trailing: Container(
         width: 100,
         child: Row(
@@ -26,7 +31,7 @@ class UserProductItem extends StatelessWidget {
                   arguments: id
                   );
               },
-              color: Theme.of(context).primaryColor,
+              color: Colors.blueGrey,
             ),
             IconButton(
               icon: Icon(Icons.delete),

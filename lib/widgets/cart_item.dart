@@ -30,21 +30,32 @@ class CartItem extends StatelessWidget {
       confirmDismiss: (direction) {
         return showDialog(
             context: context,
+
             builder: (ctx) => AlertDialog(
-                  title: Text('Confirmation'),
+                  title: Text('Confirmation',style: TextStyle(
+                        color: Theme.of(context).primaryColor
+                      ),),
                   content: Text(
-                      'Do you want to delete the selected item from the cart?'),
+                      'Do you want to delete the selected item from the cart?',
+                      style: TextStyle(
+                        color: Colors.black87
+                      ),
+                      ),
                   actions: <Widget>[
                     FlatButton(
                         onPressed: () {
                           Navigator.of(context).pop(false);
                         },
-                        child: Text('Go back')),
+                        child: Text('Go back',style: TextStyle(
+                        color: Theme.of(context).primaryColor
+                      ),)),
                     FlatButton(
                         onPressed: () {
                           Navigator.of(context).pop(true);
                         },
-                        child: Text('Confirm'))
+                        child: Text('Confirm',style: TextStyle(
+                        color: Theme.of(context).primaryColor
+                      ),))
                   ],
                 ));
       },
@@ -57,19 +68,31 @@ class CartItem extends StatelessWidget {
           vertical: 4,
         ),
         child: Padding(
-          padding: EdgeInsets.all(8),
+          padding: EdgeInsets.all(1),
           child: ListTile(
             leading: CircleAvatar(
+              radius: 23,
+              backgroundColor: Theme.of(context).primaryColor,
               child: Padding(
                 padding: EdgeInsets.all(5),
                 child: FittedBox(
-                  child: Text('₹$price'),
+                  child: Text('₹$price',style: TextStyle(
+                        color: Colors.white
+                      ),),
                 ),
               ),
             ),
             title: Text(title),
-            subtitle: Text('Total:₹${price * quantity}'),
-            trailing: Text('$quantity'),
+            subtitle: Text('Cost: ₹${price * quantity}',
+
+            style: TextStyle(
+                        color: Colors.black54
+                      ),),
+            trailing: Text('$quantity',
+            style:TextStyle(
+                        color: Theme.of(context).primaryColor
+                      ) ,
+            ),
           ),
         ),
       ),

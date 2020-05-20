@@ -7,9 +7,9 @@ class Chatbot extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        primarySwatch: Colors.deepOrange,
-        accentColor: Colors.deepOrange[100],
-        fontFamily: 'Lato',
+        primaryColor: Color(0xff075E54),
+                accentColor: Colors.blueGrey,
+                fontFamily: 'lineto',
       ),
       home: ChatScreen(title: 'Virtual Assistance'),
     );
@@ -65,7 +65,15 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Virtual Assistance'),
+      //  title: Text('Virtual Assistance', 
+      // style: TextStyle(
+      // color: Colors.black87,
+      // fontFamily: "lineto",
+      // fontWeight: FontWeight.w300
+      // ),),
+      elevation: 0.0,
+      backgroundColor: Colors.white,
+      iconTheme: new IconThemeData(color: Colors.grey),
         actions: <Widget>[
           IconButton(
             icon: Icon(
@@ -86,22 +94,43 @@ class _ChatScreenState extends State<ChatScreen> {
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              SizedBox(
+                height:MediaQuery.of(context).size.height/10,
+              ),
+              Text('Virtual',
+              style: TextStyle(
+                color: Theme.of(context).primaryColor,
+                fontFamily: "lineto",
+                fontSize: 70,
+                fontWeight: FontWeight.w600
+              ),),
+              Text(' Assistance',
+              style: TextStyle(
+                color: Theme.of(context).primaryColor,
+                fontFamily: "lineto",
+                fontSize: 45,
+                fontWeight: FontWeight.w600
+              ),),
+              Divider(color: Colors.grey,),
+              SizedBox(
+                height:MediaQuery.of(context).size.height/20,
+              ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10.0),
                 child: Text(
-                  _text != null ? '$_text' : 'How can I help you?',
+                  _text != null ? '$_text' : 'Hey! How can I help you?',
                   textAlign: TextAlign.start,
                   style: TextStyle(
-                    fontSize: 22,
+                    fontSize: 20.5,
                     fontWeight: FontWeight.w400,
                   ),
                 ),
               ),
               SizedBox(
-                height: 50.0,
+                height: MediaQuery.of(context).size.height/40,
               ),
               TextField(
                 autocorrect: true,
@@ -115,7 +144,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                   focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(
-                      color: Colors.deepOrange,
+                      color: Theme.of(context).primaryColor,
                     ),
                   ),
                   suffixIcon: IconButton(
@@ -124,9 +153,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       onPressed: _callWatsonAssistant),
                 ),
               ),
-              SizedBox(
-                height: 70.0,
-              ),
+              
             ],
           ),
         ),

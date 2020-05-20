@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/auth_card.dart';
 
-
 enum AuthMode { Signup, Login }
-
 
 class AuthScreen extends StatelessWidget {
   static const routeName = '/auth';
@@ -18,26 +16,19 @@ class AuthScreen extends StatelessWidget {
       body: Stack(
         children: <Widget>[
           Container(
-            height: 350,
+            height: 400,
             width: double.infinity,
             child: Container(
               margin: EdgeInsets.symmetric(
-                horizontal: 40,
-                vertical: 100
+                horizontal: 10,
+                vertical: 110
                 ),
-              child: Text('Hey there!',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 60,
-                  fontWeight: FontWeight.bold
-                  ) 
-                  ),
-            ),
+                        child: Image.asset('assets/images/optima_logo_1.png')),
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Color.fromRGBO(189, 22, 0, 1).withOpacity(0.9),
-                  Color.fromRGBO(255, 45, 0, 1).withOpacity(0.9),
+                  Color(0xff075E54),
+                  Color(0xff05463F),
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -58,25 +49,17 @@ class AuthScreen extends StatelessWidget {
               height: deviceSize.height,
               width: deviceSize.width,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
+                  SizedBox(
+                    height:155
+                  ),
                   Flexible(
                     flex: deviceSize.width > 600 ? 2 : 1,
                     child: AuthCard(),
                   ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Flexible(
-                    child: Container(
-                        margin: EdgeInsets.all(5),
-                        height: 170,
-                        child: Image.asset('assets/images/optima_logo.png')),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
+                  
                 ],
               ),
             ),

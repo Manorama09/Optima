@@ -31,11 +31,27 @@ class _ItemRequestScreen extends State<ItemRequestScreen> {
       await showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
-          title: Text('An error occurred!'),
-          content: Text('Something went wrong.'),
+          title: Text('An error occurred!',
+           style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                  fontFamily: "lineto",
+                  fontWeight: FontWeight.w600
+              ),),
+          content: Text('Something went wrong.',
+          style: TextStyle(
+                  color: Colors.black54,
+                  fontFamily: "lineto",
+                  fontWeight: FontWeight.w600
+              ),),
           actions: <Widget>[
             FlatButton(
-              child: Text('Okay'),
+              child: Text('Okay',
+              style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                  fontFamily: "lineto",
+                  fontWeight: FontWeight.w600
+              ),
+              ),
               onPressed: () {
                 Navigator.of(ctx).pop();
               },
@@ -50,11 +66,26 @@ class _ItemRequestScreen extends State<ItemRequestScreen> {
     await showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
-              title: Text('Thank you!'),
-              content: Text('Your request was noted.'),
+              title: Text('Thank you!',
+               style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                  fontFamily: "lineto",
+                  fontWeight: FontWeight.w600
+              ),),
+              content: Text('Your request was noted.',
+               style: TextStyle(
+                  color: Colors.black54,
+                  fontFamily: "lineto",
+                  fontWeight: FontWeight.w600
+              ),),
               actions: <Widget>[
                 FlatButton(
-                  child: Text('Okay'),
+                  child: Text('Okay',
+                   style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                  fontFamily: "lineto",
+                  fontWeight: FontWeight.w600
+              ),),
                   onPressed: () {
                     Navigator.of(ctx).pop();
                   },
@@ -69,31 +100,59 @@ class _ItemRequestScreen extends State<ItemRequestScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Request Item'),
+        backgroundColor: Colors.white,
+        elevation: 0.0,
+        iconTheme: new IconThemeData(color: Colors.grey),
       ),
       body: _isLoading
           ? Center(
               child: CircularProgressIndicator(),
             )
           : Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.symmetric(horizontal:25.0),
               child: Form(
                 key: _form,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
 
                   children: <Widget>[
+                     SizedBox(
+                height:MediaQuery.of(context).size.height/15,
+              ),
+              Text('Request for a',
+              style: TextStyle(
+                color: Theme.of(context).primaryColor,
+                fontFamily: "lineto",
+                fontSize: 40,
+                fontWeight: FontWeight.w600
+              ),),
+              Text('Product',
+              style: TextStyle(
+                color: Theme.of(context).primaryColor,
+                fontFamily: "lineto",
+                fontSize: 65,
+                fontWeight: FontWeight.w600
+              ),),
+              Divider(color: Colors.grey,),
+              SizedBox(
+                height:MediaQuery.of(context).size.height/40,
+              ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text('Let us know what you need!',
                       textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontSize: 25
-                      ),),
+                      
+              style: TextStyle(
+                color: Colors.black54,
+                fontFamily: "lineto",
+                fontSize: 25,
+                fontWeight: FontWeight.w400
+              ),),
                     ),
                     SizedBox(
-                      height:50
-                    ),
+                height:MediaQuery.of(context).size.height/100,
+              ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextFormField(
@@ -108,9 +167,9 @@ class _ItemRequestScreen extends State<ItemRequestScreen> {
                         },
                         autocorrect: true,
                         decoration: InputDecoration(
-                          hintText: 'Enter item',
+                          hintText: 'Enter product title',
                           contentPadding: EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 10.0),
+                              vertical: 10.0, horizontal: 5.0),
                           enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.grey),
                           ),
@@ -126,21 +185,38 @@ class _ItemRequestScreen extends State<ItemRequestScreen> {
                         ),
                       ),
                     ),
+                    
                     SizedBox(
-                        height:50
+                        height:MediaQuery.of(context).size.height/15
                     ),
-                    FloatingActionButton.extended(
-                      backgroundColor: Colors.red,
-                      onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => ScreenVisualRecognition()));
-                      },
-                      icon: Icon(
-                        Icons.add,
+                    Text('  You can also upload a photo instead!',
+              style: TextStyle(
+                color: Colors.black54,
+                fontFamily: "lineto",
+                fontSize: 17,
+                fontWeight: FontWeight.w400
+              ),),
+              SizedBox(
+                        height:MediaQuery.of(context).size.height/100
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 50,
+                      child: FlatButton(
+                        color: Theme.of(context).primaryColor,
+                        onPressed: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => ScreenVisualRecognition()));
+                        },
+                        child: Text('Upload a Photo',
+                        style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: "lineto",
+                  fontSize: 23,
+                  fontWeight: FontWeight.w600
+              ),),
                       ),
-                      label : Text("Use Watson Visual Recognition"),
                     ),
-
                   ],
                 ),
               ),

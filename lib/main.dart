@@ -13,15 +13,20 @@ import './screens/edit_product_screen.dart';
 import './providers/auth.dart';
 import './providers/users.dart';
 //import './splash_screen.dart';
+import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 import './screens/welcome_screen.dart';
 import 'screens/auth_screen.dart.dart';
 import './providers/item.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
+  
   @override
   Widget build(BuildContext context) {
+    
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(
@@ -61,9 +66,9 @@ class MyApp extends StatelessWidget {
           builder: (ctx, auth, _) => MaterialApp(
               title: 'OPTIMA',
               theme: ThemeData(
-                primarySwatch: Colors.deepOrange,
-                accentColor: Colors.deepOrange,
-                fontFamily: 'Lato',
+                primaryColor: Color(0xff075E54),
+                accentColor: Colors.blueGrey,
+                fontFamily: 'lineto',
               ),
 
               home: auth.isAuth ? ProductsOverviewScreen(auth.user) : WelcomeScreen(),

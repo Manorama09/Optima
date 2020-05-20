@@ -9,7 +9,6 @@ class OrdersScreen extends StatelessWidget {
 
   final String user;
   OrdersScreen(this.user);
-
   static const routeName = '/orders';
 
   @override
@@ -17,8 +16,16 @@ class OrdersScreen extends StatelessWidget {
     print('building orders');
     // final orderData = Provider.of<Orders>(context);
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Your Orders'),
+       appBar: AppBar(
+        title: Text('Your Orders', 
+      style: TextStyle(
+      color: Colors.black87,
+      fontFamily: "lineto",
+      fontWeight: FontWeight.w300
+      ),),
+      elevation: 0.0,
+      backgroundColor: Colors.white,
+      iconTheme: new IconThemeData(color: Colors.grey),
       ),
       drawer: AppDrawer(user),
       body: FutureBuilder(

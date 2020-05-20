@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../providers/products.dart';
 import '../widgets/user_product_item.dart';
 import '../widgets/app_drawer.dart';
@@ -10,7 +9,6 @@ class UserProductsScreen extends StatelessWidget {
 
   final String user;
   UserProductsScreen(this.user);
-
   static const routeName = '/user-products';
 
   Future<void> _refreshProducts(BuildContext context) async {
@@ -20,11 +18,20 @@ class UserProductsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     print('rebuilding...');
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Your Products'),
-        actions: <Widget>[
+        title: Text('Your Products', 
+      style: TextStyle(
+      color: Colors.black87,
+      fontFamily: "lineto",
+      fontWeight: FontWeight.w300
+      ),),
+      elevation: 0.0,
+      backgroundColor: Colors.white,
+      iconTheme: new IconThemeData(color: Colors.grey),
+      actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.add),
             onPressed: () {
@@ -58,6 +65,7 @@ class UserProductsScreen extends StatelessWidget {
                                     ],
                                   ),
                             ),
+
                           ),
                     ),
                   ),

@@ -47,15 +47,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
           children: <Widget>[
             Container(
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    Color.fromRGBO(189, 22, 0, 1).withOpacity(0.9),
-                    Color.fromRGBO(255, 45, 0, 1).withOpacity(0.9),
-                  ],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  stops: [0, 1],
-                ),
+                color: Color(0xff05463F),
               ),
             ),
             Padding(
@@ -64,14 +56,17 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  SizedBox(height: 100),
+                  
                   CircleAvatar(
-                    backgroundColor: Colors.white,
-                    radius: 120.0,
-                    child: Padding(
-                      padding: EdgeInsets.all(30),
-                      child: Image.asset('assets/images/optima_logo.png'),
-                    ),
+                    backgroundColor: Color(0xff05463F),
+                    radius: 100,
+                      child: Image.asset('assets/images/optima_logo_1.png'),                      
+                  ),
+                  Text('OPTIMA',
+                  style: TextStyle(color: Colors.white,
+                  fontSize: 50,
+                  fontWeight: FontWeight.w600
+                  ),
                   ),
                   SizedBox(
                     width: 250.0,
@@ -85,48 +80,45 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                         ],
                         textStyle: TextStyle(
                             color: Colors.white,
-                            fontFamily: "Roboto",
-                            fontSize: 24.0,
+                            fontFamily: "lineto",
+                            fontSize: 20.0,
                             fontWeight: FontWeight.bold),
                         textAlign: TextAlign.center,
                         alignment: AlignmentDirectional
                             .centerStart // or Alignment.topLeft
                         ),
                   ),
-                  SizedBox(
-                    height: 48.0,
-                  ),
                   Center(
                     child: Text(
                       "Click anywhere to proceed",
                       style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.w800),
+                          color: Colors.white70, fontWeight: FontWeight.w800),
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Hero(
-                        tag: 'ibm',
-                        child: Center(
-                          child: Container(
-                            child: Image.asset('assets/images/ibm.png'),
-                            height: 25.0,
-                          ),
-                        ),
-                      ),
-                      Hero(
-                        tag: 'nasscom',
-                        child: Center(
-                          child: Container(
-                            child: Image.asset('assets/images/nasscom.png'),
-                            height: 25.0,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  //   crossAxisAlignment: CrossAxisAlignment.center,
+                  //   children: <Widget>[
+                  //     Hero(
+                  //       tag: 'ibm',
+                  //       child: Center(
+                  //         child: Container(
+                  //           child: Image.asset('assets/images/ibm.png'),
+                  //           height: 25.0,
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     Hero(
+                  //       tag: 'nasscom',
+                  //       child: Center(
+                  //         child: Container(
+                  //           child: Image.asset('assets/images/nasscom.png'),
+                  //           height: 25.0,
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
                 ],
               ),
             ),

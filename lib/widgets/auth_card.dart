@@ -168,7 +168,7 @@ class _AuthCardState extends State<AuthCard> {
       ),
       elevation: 8.0,
       child: Container(
-        height: _authMode == AuthMode.Signup ? 400 : 330,
+        height: _authMode == AuthMode.Signup ? 380 : 320,
         constraints:
             BoxConstraints(minHeight: _authMode == AuthMode.Signup ? 320 : 260),
         width: deviceSize.width * 0.75,
@@ -224,6 +224,7 @@ class _AuthCardState extends State<AuthCard> {
                        mainAxisAlignment: MainAxisAlignment.start,
                        children: <Widget>[
                          new Radio(
+                           activeColor: Color(0XFFEC4C4D),
                            value: 0,
                            groupValue: radioValue,
                            onChanged: (newValue) {
@@ -236,6 +237,7 @@ class _AuthCardState extends State<AuthCard> {
                          ),
                          new Text('Customer'),
                          new Radio(
+                           activeColor: Color(0XFFEC4C4D),
                            value: 1,
                            groupValue: radioValue,
                           onChanged: (newValue) {

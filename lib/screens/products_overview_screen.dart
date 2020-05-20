@@ -9,6 +9,7 @@ import '../screens/cart_screen.dart';
 import '../providers/products.dart';
 import 'package:draggable_floating_button/draggable_floating_button.dart';
 
+
 enum FilterOptions {
   Favorites,
   All,
@@ -54,7 +55,15 @@ static const routeName = '/products_overview_screen';
   AppBar getAppBar() {
     
     return AppBar(
-      title: Text('Optima'),
+      title: Text('Shop', 
+      style: TextStyle(
+      color: Colors.black87,
+      fontFamily: "lineto",
+      fontWeight: FontWeight.w300
+      ),),
+      elevation: 0.0,
+      backgroundColor: Colors.white,
+      iconTheme: new IconThemeData(color: Colors.grey),
       actions: <Widget>[
         Consumer<Cart>(
           builder: (_, cart, ch) => Badge(
@@ -62,6 +71,7 @@ static const routeName = '/products_overview_screen';
             value: cart.itemCount.toString(),
           ),
           child: IconButton(
+            color: Colors.grey[400],
             icon: Icon(
               Icons.shopping_cart,
             ),
@@ -82,14 +92,15 @@ static const routeName = '/products_overview_screen';
           },
           icon: Icon(
             Icons.more_vert,
+          color: Colors.grey,
           ),
           itemBuilder: (_) => [
             PopupMenuItem(
-              child: Text('Only Favorites'),
+              child: Text('My Favorites'),
               value: FilterOptions.Favorites,
             ),
             PopupMenuItem(
-              child: Text('Show All'),
+              child: Text('All Products'),
               value: FilterOptions.All,
             ),
           ],
@@ -97,7 +108,7 @@ static const routeName = '/products_overview_screen';
       ],
     );
   }
-
+  int _index;
   @override
   Widget build(BuildContext context) {
     print(user);
@@ -106,65 +117,80 @@ static const routeName = '/products_overview_screen';
       resizeToAvoidBottomInset: false,
       appBar: appBar,
       drawer: AppDrawer(user),
+     
       body: _isLoading
           ? Center(child: CircularProgressIndicator())
           : Stack(
               children: <Widget>[
                 Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Container(
-                      margin: EdgeInsets.all(10),
-                      height: 150,
-                      width: double.infinity,
-                      color: Colors.transparent,
-                      child: Container(
-                          decoration: BoxDecoration(
-                            color: const Color(0xffE8FCC6),
-                            borderRadius: BorderRadius.all(Radius.circular(5)),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey,
-                                blurRadius: 1, // soften the shadow
-                                spreadRadius: 1, //extend the shadow
-                                offset: Offset(
-                                  0.5, // Move to right 10  horizontally
-                                  0.5, // Move to bottom 10 Vertically
-                                ),
-                              )
-                            ],
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              Container(
-                                  margin: EdgeInsets.all(5),
-                                  child: Image.asset(
-                                      'assets/images/optima_logo.png')),
-                              Container(
-                                width: 150,
-                                child: Center(
-                                  child: Text(
-                                    "All your essentials are right here!",
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 22),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          )),
-                    ),
+                    SizedBox(height:18),
+                     Text("    Products Available",
+                     textAlign: TextAlign.left,
+                     
+        style: TextStyle(
+          fontFamily: "lineto",
+          fontWeight: FontWeight.bold,
+          color: Colors.black87,
+          fontSize: 18
+        ),),
+        Divider(),
+                    // Container(
+                    //   margin: EdgeInsets.all(10),
+                    //   height: 150,
+                    //   width: double.infinity,
+                    //   color: Colors.transparent,
+                    //   child: Container(
+                    //       decoration: BoxDecoration(
+                    //         color: const Color(0xffE8FCC6),
+                    //         borderRadius: BorderRadius.all(Radius.circular(5)),
+                    //         boxShadow: [
+                    //           BoxShadow(
+                    //             color: Colors.grey,
+                    //             blurRadius: 1, // soften the shadow
+                    //             spreadRadius: 1, //extend the shadow
+                    //             offset: Offset(
+                    //               0.5, // Move to right 10  horizontally
+                    //               0.5, // Move to bottom 10 Vertically
+                    //             ),
+                    //           )
+                    //         ],
+                    //       ),
+                    //       child: Row(
+                    //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    //         children: <Widget>[
+                    //           Container(
+                    //               margin: EdgeInsets.all(5),
+                    //               child: Image.asset(
+                    //                   'assets/images/optima_logo.png')),
+                    //           Container(
+                    //             width: 150,
+                    //             child: Center(
+                    //               child: Text(
+                    //                 "All your essentials are right here!",
+                    //                 style: TextStyle(
+                    //                     color: Colors.black, fontSize: 22),
+                    //                 textAlign: TextAlign.center,
+                    //               ),
+                    //             ),
+                    //           ),
+                    //         ],
+                    //       )),
+                    // ),
                     Expanded(
                       child: ProductsList(_showOnlyFavorites),
                     ),
                   ],
                 ),
                 DraggableFloatingActionButton(
+                  tooltip: "Ask a question!",
                     data: 'Watson',
                     offset: new Offset(10, 10),
                     backgroundColor: Theme.of(context).primaryColor,
                     child: new Icon(
-                      Icons.chat,
+                      Icons.assistant,
                       color: Colors.white,
                     ),
                     onPressed: () {
