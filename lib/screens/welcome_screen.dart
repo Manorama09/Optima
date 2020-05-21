@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:flutter_awesome_buttons/flutter_awesome_buttons.dart';
-import '../screens/auth_screen.dart.dart';
+import '../screens/auth_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
   static const routeName = '/welcome';
@@ -95,30 +94,6 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                           color: Colors.white70, fontWeight: FontWeight.w800),
                     ),
                   ),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  //   crossAxisAlignment: CrossAxisAlignment.center,
-                  //   children: <Widget>[
-                  //     Hero(
-                  //       tag: 'ibm',
-                  //       child: Center(
-                  //         child: Container(
-                  //           child: Image.asset('assets/images/ibm.png'),
-                  //           height: 25.0,
-                  //         ),
-                  //       ),
-                  //     ),
-                  //     Hero(
-                  //       tag: 'nasscom',
-                  //       child: Center(
-                  //         child: Container(
-                  //           child: Image.asset('assets/images/nasscom.png'),
-                  //           height: 25.0,
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ],
-                  // ),
                 ],
               ),
             ),

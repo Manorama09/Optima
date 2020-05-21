@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import '../widgets/chatbot.dart';
+import 'package:draggable_floating_button/draggable_floating_button.dart';
 import 'package:provider/provider.dart';
+
+import '../widgets/chatbot.dart';
 import '../providers/cart.dart';
 import '../widgets/app_drawer.dart';
 import '../widgets/products_list.dart';
 import '../widgets/badge.dart';
 import '../screens/cart_screen.dart';
 import '../providers/products.dart';
-import 'package:draggable_floating_button/draggable_floating_button.dart';
+import '../providers/auth.dart';
 
 
 enum FilterOptions {
@@ -16,22 +18,18 @@ enum FilterOptions {
 }
 
 class ProductsOverviewScreen extends StatefulWidget {
-  final String user;
-  ProductsOverviewScreen(this.user);
-
+static const routeName = '/products_overview_screen';
   @override
-  _ProductsOverviewScreenState createState() => _ProductsOverviewScreenState(user);
+  _ProductsOverviewScreenState createState() => _ProductsOverviewScreenState();
 }
 
 class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
-static const routeName = '/products_overview_screen';
-  final String user;
-  _ProductsOverviewScreenState(this.user);
-  
+
   var _showOnlyFavorites = false;
   var _isInit = true;
   var _isLoading = false;
   bool accepted = false;
+
   @override
   void initState() {
     super.initState();
@@ -52,8 +50,8 @@ static const routeName = '/products_overview_screen';
     super.didChangeDependencies();
   }
 
-  AppBar getAppBar() {
-    
+  AppBar getAppBar(BuildContext ctx) {
+    final authData = Provider.of<Auth>(ctx);
     return AppBar(
       title: Text('Shop', 
       style: TextStyle(
@@ -64,7 +62,7 @@ static const routeName = '/products_overview_screen';
       elevation: 0.0,
       backgroundColor: Colors.white,
       iconTheme: new IconThemeData(color: Colors.grey),
-      actions: <Widget>[
+      actions: authData.seller? null : <Widget>[
         Consumer<Cart>(
           builder: (_, cart, ch) => Badge(
             child: ch,
@@ -108,15 +106,14 @@ static const routeName = '/products_overview_screen';
       ],
     );
   }
-  int _index;
+  
   @override
   Widget build(BuildContext context) {
-    print(user);
-    AppBar appBar = getAppBar();
+    AppBar appBar = getAppBar(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: appBar,
-      drawer: AppDrawer(user),
+      drawer: AppDrawer(),
      
       body: _isLoading
           ? Center(child: CircularProgressIndicator())

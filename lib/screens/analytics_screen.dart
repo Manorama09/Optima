@@ -19,6 +19,7 @@ class _LoadFirebaseStorageImageState extends State<LoadFirebaseStorageImage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: AppDrawer(),
       body: Stack(
         children: <Widget>[
           Container(

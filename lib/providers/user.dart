@@ -1,15 +1,13 @@
-import 'dart:convert';
-import 'package:flutter/foundation.dart';
-import 'package:http/http.dart' as http;
+// import 'package:flutter/foundation.dart';
 
-class User with ChangeNotifier {
-  final String id;
-  final String email;
-  final String userType;
+// class User with ChangeNotifier {
+//   final String userId;
+//   final String email;
+//   final bool seller;
  
-  User({
-    this.id,
-    @required this.email,
-    @required this.userType,
-  });
- }
+//   User({
+//     this.userId,
+//     @required this.email,
+//     @required this.seller,
+//   });
+//  }

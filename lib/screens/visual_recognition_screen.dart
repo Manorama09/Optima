@@ -1,15 +1,12 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_ibm_watson/flutter_ibm_watson.dart';
 import 'package:flutter_ibm_watson/visual-recognition/VisualRecognition.dart';
 import 'package:flutter_ibm_watson/utils/Language.dart';
 import 'package:flutter_ibm_watson/utils/IamOptions.dart';
-
-
-
 
 class ScreenVisualRecognition extends StatefulWidget {
   ScreenVisualRecognition({Key key, this.title}) : super(key: key);
@@ -37,7 +34,6 @@ class _ScreenVisualRecognition extends State<ScreenVisualRecognition> {
 
   @override
   void initState() {
-    // TODO: implement initState
     getOptions();
     super.initState();
   }
@@ -260,10 +256,7 @@ class _ScreenVisualRecognition extends State<ScreenVisualRecognition> {
               ),),
                           ],),
                       ), 
-                  
                 ),
-
-
               ],
             ),
           ),

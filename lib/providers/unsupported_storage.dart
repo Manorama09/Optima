@@ -5,6 +5,6 @@ class FireStorageService extends ChangeNotifier {
   FireStorageService();
 
   static Future<dynamic> loadFromStorage(BuildContext context, String image) {
-    throw ("Platform not found");
+    throw ("Platform not found.");
   }
 }

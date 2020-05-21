@@ -7,8 +7,6 @@ import '../widgets/app_drawer.dart';
 
 class OrdersScreen extends StatelessWidget {
 
-  final String user;
-  OrdersScreen(this.user);
   static const routeName = '/orders';
 
   @override
@@ -27,7 +25,7 @@ class OrdersScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       iconTheme: new IconThemeData(color: Colors.grey),
       ),
-      drawer: AppDrawer(user),
+      drawer: AppDrawer(),
       body: FutureBuilder(
         future: Provider.of<Orders>(context, listen: false).fetchAndSetOrders(),
         builder: (ctx, dataSnapshot) {

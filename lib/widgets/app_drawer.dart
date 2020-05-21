@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:optima/screens/auth_screen.dart.dart';
+import 'package:optima/screens/auth_screen.dart';
 import 'package:optima/screens/item_request_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:optima/screens/analytics_screen.dart';
+
 import '../screens/user_products_screen.dart';
 import '../screens/orders_screen.dart';
 import '../providers/auth.dart';
-import 'package:provider/provider.dart';
-import 'package:optima/screens/analytics_screen.dart';
-class AppDrawer extends StatelessWidget {
 
-  final String user;
-  AppDrawer(this.user);
+class AppDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authData = Provider.of<Auth>(context);
     return Drawer(
-      child: Column(children: <Widget>[
-      UserAccountsDrawerHeader(
+      child: 
+      Column(
+        children: <Widget>[
+        UserAccountsDrawerHeader(
         accountName: Text('Hello there!', style: TextStyle(fontSize: 30),) ,
          //accountEmail: Text(""),
         currentAccountPicture: CircleAvatar(
@@ -23,14 +25,13 @@ class AppDrawer extends StatelessWidget {
           child: Image.asset('assets/images/optima_logo.png')
         ),
       ),
-      if(!user.startsWith('s'))
       ListTile(
           leading: Icon(Icons.shopping_cart),
           title: Text('Shop'),
           onTap: () {
             Navigator.of(context).pushNamed('/');
           }),
-      if(!user.startsWith('s'))
+      if(!authData.seller)
       ListTile(
           leading: Icon(Icons.payment),
           title: Text('Orders'),
@@ -38,7 +39,7 @@ class AppDrawer extends StatelessWidget {
             Navigator.of(context).pushNamed(OrdersScreen.routeName);
           }
           ),
-          if(!user.startsWith('s'))
+          if(!authData.seller)
       ListTile(
           leading: Icon(Icons.note_add),
           title: Text('Request Item'),
@@ -46,14 +47,14 @@ class AppDrawer extends StatelessWidget {
             Navigator.of(context).pushNamed(ItemRequestScreen.routeName);
           }
           ),
-          if(user.startsWith('s'))
+          if(authData.seller)
       ListTile(
           leading: Icon(Icons.edit),
           title: Text('Manage Products'),
           onTap: () {
             Navigator.of(context).pushNamed(UserProductsScreen.routeName);
           }),
-          if(user.startsWith('s'))
+          if(authData.seller)
         ListTile(
             leading: Icon(Icons.scatter_plot),
             title: Text('View Analytics'),

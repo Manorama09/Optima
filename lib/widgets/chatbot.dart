@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../widgets/app_drawer.dart';
 import 'package:watson_assistant_v2/watson_assistant_v2.dart';
 
 class Chatbot extends StatelessWidget {
@@ -65,12 +64,6 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-      //  title: Text('Virtual Assistance', 
-      // style: TextStyle(
-      // color: Colors.black87,
-      // fontFamily: "lineto",
-      // fontWeight: FontWeight.w300
-      // ),),
       elevation: 0.0,
       backgroundColor: Colors.white,
       iconTheme: new IconThemeData(color: Colors.grey),
@@ -88,7 +81,6 @@ class _ChatScreenState extends State<ChatScreen> {
           )
         ],
       ),
-      //drawer: AppDrawer(),
       body: Scaffold(
         backgroundColor: Colors.white,
         body: Padding(
@@ -153,7 +145,6 @@ class _ChatScreenState extends State<ChatScreen> {
                       onPressed: _callWatsonAssistant),
                 ),
               ),
-              
             ],
           ),
         ),

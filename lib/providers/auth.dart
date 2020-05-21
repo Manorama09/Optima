@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import '../models/http_exception.dart';
@@ -8,7 +7,7 @@ class Auth with ChangeNotifier {
   String _token;
   DateTime _expiryDate;
   String _userId;
-  String _user;
+  bool seller;
 
   bool get isAuth {
     return token != null;
@@ -27,21 +26,17 @@ class Auth with ChangeNotifier {
     return _userId;
   }
 
-  String get user{
-    return _user;
-  }
-
   Future<void> _authenticate(
-      String email, String password, String urlSegment, String user) async {
+      String email, String password, String urlSegment, bool seller) async {
+    this.seller=seller;
     final url ='https://identitytoolkit.googleapis.com/v1/accounts:$urlSegment?key=AIzaSyBMbdeCerMM19JDZBELLno7oUgdb8aYems';
     try {
       final response = await http.post(
         url,
         body: json.encode(
-          {
-            'email': email,
+          { 'email': email,
             'password': password,
-            'user':user,
+            'seller':seller,
             'returnSecureToken': true,
           },
         ),
@@ -59,27 +54,26 @@ class Auth with ChangeNotifier {
           ),
         ),
       );
-      print("hello"+ _userId);
-      _user=user;
+      print("User id = "+ _userId);
+      print("Is seller? =" +seller.toString());
       notifyListeners();
     } catch (error) {
       throw error;
     }
   }
 
-  Future<void> signup(String email, String password,String user) async {
-    return _authenticate(email, password, 'signUp',user);
+  Future<void> signup(String email, String password,bool seller) async {
+    return _authenticate(email, password, 'signUp', seller);
   }
 
-  Future<void> login(String email, String password,String user) async {
-    return _authenticate(email, password, 'signInWithPassword',user);
+  Future<void> login(String email, String password,bool seller) async {
+    return _authenticate(email, password, 'signInWithPassword',seller);
   }
 
   void logout() {
     _token = null;
     _userId = null;
     _expiryDate = null;
-    _user=null;
     notifyListeners();
   }
 }

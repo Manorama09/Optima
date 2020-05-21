@@ -9,10 +9,7 @@ class AuthScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
-    // final transformConfig = Matrix4.rotationZ(-8 * pi / 180);
-    // transformConfig.translate(-10.0);
     return Scaffold(
-      // resizeToAvoidBottomInset: false,
       body: Stack(
         children: <Widget>[
           Container(
@@ -23,7 +20,7 @@ class AuthScreen extends StatelessWidget {
                 horizontal: 10,
                 vertical: 110
                 ),
-                        child: Image.asset('assets/images/optima_logo_1.png')),
+            child: Image.asset('assets/images/optima_logo_1.png')),
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
@@ -59,7 +56,6 @@ class AuthScreen extends StatelessWidget {
                     flex: deviceSize.width > 600 ? 2 : 1,
                     child: AuthCard(),
                   ),
-                  
                 ],
               ),
             ),

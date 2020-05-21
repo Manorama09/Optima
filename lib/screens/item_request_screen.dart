@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import '../providers/item.dart';
+import 'package:optima/widgets/app_drawer.dart';
 import 'package:provider/provider.dart';
-import '../providers/auth.dart';
 import 'visual_recognition_screen.dart';
+import '../providers/auth.dart';
+import '../providers/item.dart';
+
 class ItemRequestScreen extends StatefulWidget {
   static const routeName = '/request-product';
   @override
@@ -10,23 +12,23 @@ class ItemRequestScreen extends StatefulWidget {
 }
 
 class _ItemRequestScreen extends State<ItemRequestScreen> {
-  final _form = GlobalKey<FormState>();
+  final _requestForm = GlobalKey<FormState>();
   String value = "";
   var _isLoading = false;
 
   Future<void> _saveForm() async {
     final authData = Provider.of<Auth>(context, listen: false);
-    final isValid = _form.currentState.validate();
+    final isValid = _requestForm.currentState.validate();
     if (!isValid) {
       return;
     }
-    _form.currentState.save();
+    _requestForm.currentState.save();
     setState(() {
       _isLoading = true;
     });
     try {
       await Provider.of<Item>(context, listen: false)
-          .addItem(authData.token, value);
+          .addItem(authData.userId, authData.token, value);
     } catch (error) {
       await showDialog(
         context: context,
@@ -96,9 +98,8 @@ class _ItemRequestScreen extends State<ItemRequestScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final item = Provider.of<Item>(context, listen: false);
-
     return Scaffold(
+      drawer: AppDrawer(),
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0.0,
@@ -111,7 +112,7 @@ class _ItemRequestScreen extends State<ItemRequestScreen> {
           : Padding(
               padding: const EdgeInsets.symmetric(horizontal:25.0),
               child: Form(
-                key: _form,
+                key: _requestForm,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,

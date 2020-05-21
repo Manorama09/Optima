@@ -7,8 +7,6 @@ import './edit_product_screen.dart';
 
 class UserProductsScreen extends StatelessWidget {
 
-  final String user;
-  UserProductsScreen(this.user);
   static const routeName = '/user-products';
 
   Future<void> _refreshProducts(BuildContext context) async {
@@ -18,7 +16,6 @@ class UserProductsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     print('rebuilding...');
     return Scaffold(
       appBar: AppBar(
@@ -40,7 +37,7 @@ class UserProductsScreen extends StatelessWidget {
           ),
         ],
       ),
-      drawer: AppDrawer(user),
+      drawer: AppDrawer(),
       body: FutureBuilder(
         future: _refreshProducts(context),
         builder: (ctx, snapshot) =>

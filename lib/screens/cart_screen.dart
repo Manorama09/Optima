@@ -57,7 +57,6 @@ class CartScreen extends StatelessWidget {
                   fontSize: 70,
                   fontWeight: FontWeight.w600
               ),
-                      
                       ),
 ),
                  OrderButton(cart: cart),
