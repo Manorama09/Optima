@@ -6,9 +6,11 @@ import 'package:optima/widgets/app_drawer.dart';
 
 final String image1 = "ibm.png";
 final String image2 = "tree.jpg";
+final String image3="Adafruit-1.png";
+final String image4="optima_logo";
+
 
 String image = image1;
-
 class LoadFirebaseStorageImage extends StatefulWidget {
   @override
   _LoadFirebaseStorageImageState createState() =>
@@ -16,10 +18,22 @@ class LoadFirebaseStorageImage extends StatefulWidget {
 }
 
 class _LoadFirebaseStorageImageState extends State<LoadFirebaseStorageImage> {
+
+  var imageList = [image1, image2,image3,image4];
+  int i=-1;
+  int nextImageCount(){
+    if(i!=3){
+      i++;
+
+    }
+    else if(i==3){
+      i=0;
+    }
+    return i;
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: AppDrawer(),
       body: Stack(
         children: <Widget>[
           Container(
@@ -28,21 +42,21 @@ class _LoadFirebaseStorageImageState extends State<LoadFirebaseStorageImage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text('  View',
-              style: TextStyle(
-                color: Theme.of(context).primaryColor,
-                fontFamily: "lineto",
-                fontSize: 90,
-                fontWeight: FontWeight.w700
-              ),),
-               Text('   Analytics',
-              style: TextStyle(
-                color: Theme.of(context).primaryColor,
-                fontFamily: "lineto",
-                fontSize: 60,
-                fontWeight: FontWeight.w700
-              ),),
-              Divider(color: Colors.grey,),
-              
+                  style: TextStyle(
+                      color: Theme.of(context).primaryColor,
+                      fontFamily: "lineto",
+                      fontSize: 90,
+                      fontWeight: FontWeight.w700
+                  ),),
+                Text('   Analytics',
+                  style: TextStyle(
+                      color: Theme.of(context).primaryColor,
+                      fontFamily: "lineto",
+                      fontSize: 60,
+                      fontWeight: FontWeight.w700
+                  ),),
+                Divider(color: Colors.grey,),
+
                 Expanded(
                   child: Stack(
                     children: <Widget>[
@@ -69,8 +83,8 @@ class _LoadFirebaseStorageImageState extends State<LoadFirebaseStorageImage> {
 
                               if (snapshot.connectionState ==
                                   ConnectionState.waiting)
-                                return                                
-                                     Center(child: CircularProgressIndicator());
+                                return
+                                  Center(child: CircularProgressIndicator());
 
                               return Container();
                             },
@@ -93,30 +107,32 @@ class _LoadFirebaseStorageImageState extends State<LoadFirebaseStorageImage> {
     return Container(
       child: Stack(
         children: <Widget>[
-         
-             Container(
-               margin: EdgeInsets.all(25),
-                      width: double.infinity,
-                      height: 50,
-                      child: FlatButton(
-                        color: Theme.of(context).primaryColor,
-                        onPressed: () {
-                          setState(() {
-                  final _random = new Random();
-                  var imageList = [image1, image2];
-                  image = imageList[_random.nextInt(imageList.length)];
+
+          Container(
+            margin: EdgeInsets.all(25),
+            width: double.infinity,
+            height: 50,
+            child: FlatButton(
+              color: Theme.of(context).primaryColor,
+              onPressed: () {
+                setState(() {
+                  int j= nextImageCount();
+                  image=imageList[j];
+//                  final _random = new Random();
+//                  var imageList = [image1, image2,image3,image4];
+//                  image = imageList[_random.nextInt(imageList.length)];
                 });
-                },
-                        child: Text('Load Photo',
-                        style: TextStyle(
-                  color: Colors.white,
-                  fontFamily: "lineto",
-                  fontSize: 23,
-                  fontWeight: FontWeight.w600
+              },
+              child: Text('Load Photo',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: "lineto",
+                    fontSize: 23,
+                    fontWeight: FontWeight.w600
+                ),
               ),
-              ),
-                      ),
-             ),         
+            ),
+          ),
         ],
       ),
     );
