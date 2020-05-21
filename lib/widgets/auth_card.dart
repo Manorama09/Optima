@@ -4,7 +4,6 @@ import 'package:optima/providers/auth.dart';
 
 import '../providers/auth.dart';
 import '../models/http_exception.dart';
-import '../screens/products_overview_screen.dart';
 import '../screens/auth_screen.dart';
 
 
@@ -71,34 +70,6 @@ class _AuthCardState extends State<AuthCard> {
           authData['password'],
           authData['seller']
         );
-
-      //   try {
-      //   final newUser = new User(
-      //   email: authData['email'],
-      //   userType: authData['user']
-      //  // id: json.decode(response.body)['name'],
-      // );
-      //   await Provider.of<Users>(context, listen: false).addUser(newUser);
-      // }
-      // catch (error)
-      // {
-      //  await showDialog(
-      //    context: context,
-      //    builder: (ctx) => AlertDialog(
-      //          title: Text('An error occurred!'),
-      //          content: Text('Something went wrong.'),
-      //          actions: <Widget>[
-      //            FlatButton(
-      //              child: Text('Okay'),
-      //              onPressed: () {
-      //                Navigator.of(ctx).pop();
-      //              },
-      //            )
-      //          ],
-      //        )
-      //  );
-
-      // }
       }
     } on HttpException catch (error) {
       var errorMessage = 'Authentication failed';

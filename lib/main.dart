@@ -47,16 +47,6 @@ class MyApp extends StatelessWidget {
               : previousOrders.orders
               ),
           ),
-          // ChangeNotifierProxyProvider<Auth, Users>(
-          //   update: (ctx, auth, previousUsers) 
-          //   => Users(
-          //       auth.token,
-          //       auth.userId,
-          //       previousUsers == null ? [] : previousUsers.users),
-          // ),
-          // ChangeNotifierProvider(
-          //   create: (ctx) => User(),
-          // ),
           ChangeNotifierProvider(
             create: (ctx) => Item(),
           ),

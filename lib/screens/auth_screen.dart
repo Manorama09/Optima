@@ -18,7 +18,7 @@ class AuthScreen extends StatelessWidget {
             child: Container(
               margin: EdgeInsets.symmetric(
                 horizontal: 10,
-                vertical: 110
+                vertical: 120
                 ),
             child: Image.asset('assets/images/optima_logo_1.png')),
             decoration: BoxDecoration(

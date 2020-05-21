@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:optima/widgets/app_drawer.dart';
 import 'package:provider/provider.dart';
 import 'visual_recognition_screen.dart';
+
 import '../providers/auth.dart';
 import '../providers/item.dart';
 

@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:optima/providers/fire_storage_service.dart';
 import 'package:optima/widgets/app_drawer.dart';
@@ -33,6 +32,12 @@ class _LoadFirebaseStorageImageState extends State<LoadFirebaseStorageImage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: AppDrawer(),
+      appBar: AppBar(
+      elevation: 0.0,
+      backgroundColor: Colors.white,
+      iconTheme: new IconThemeData(color: Colors.grey),
+      ),
       body: Stack(
         children: <Widget>[
           Container(
