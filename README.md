@@ -15,7 +15,7 @@
 6. The experience for the customer is bundled with the wonders of the IBM Watson Chatbot. 
 Further both the customer and the shop owner can use the IBM Visual Recognition tool to add items to their list/inventory respectively. 
 
-### Everyone benefits from this free application as while the customer remains safe at home and seamlessly uses Optima for his/her shopping needs, the shop owner gets free analytics that could boost sales and help them benefit in these tough times, while being able to monitor the customer’s requirements.
+##### Everyone benefits from this free application as while the customer remains safe at home and seamlessly uses Optima for his/her shopping needs, the shop owner gets free analytics that could boost sales and help them benefit in these tough times, while being able to monitor the customer’s requirements.
 
 
 
