@@ -99,6 +99,8 @@ class _ItemRequestScreen extends State<ItemRequestScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomPadding: false,
       drawer: AppDrawer(),
       appBar: AppBar(
         backgroundColor: Colors.white,
