@@ -4,13 +4,12 @@ import 'package:optima/providers/fire_storage_service.dart';
 import 'package:optima/widgets/app_drawer.dart';
 
 
-final String image1 = "ibm.png";
-final String image2 = "tree.jpg";
-final String image3="Adafruit-1.png";
-final String image4="optima_logo";
+final String image1 = "image1.jpg";
+final String image2 = "image2.jpg";
+final String image3="image3.jpg";
 
 
-String image = image1;
+String image = "";
 class LoadFirebaseStorageImage extends StatefulWidget {
   @override
   _LoadFirebaseStorageImageState createState() =>
@@ -19,14 +18,14 @@ class LoadFirebaseStorageImage extends StatefulWidget {
 
 class _LoadFirebaseStorageImageState extends State<LoadFirebaseStorageImage> {
 
-  var imageList = [image1, image2,image3,image4];
+  var imageList = [image1, image2,image3];
   int i=-1;
   int nextImageCount(){
-    if(i!=3){
+    if(i!=2){
       i++;
 
     }
-    else if(i==3){
+    else if(i==2){
       i=0;
     }
     return i;
@@ -123,7 +122,7 @@ class _LoadFirebaseStorageImageState extends State<LoadFirebaseStorageImage> {
 //                  image = imageList[_random.nextInt(imageList.length)];
                 });
               },
-              child: Text('Load Photo',
+              child: Text('Load Analytics',
                 style: TextStyle(
                     color: Colors.white,
                     fontFamily: "lineto",
