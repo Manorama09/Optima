@@ -25,7 +25,7 @@ Further both the customer and the shop owner can use the IBM Visual Recognition 
 
 ## Drive Link to the apk
 
-https://drive.google.com/file/d/1InC06NV7WL9AXYlxLw_jY19Tjzj36IVM/view?usp=drivesdk
+https://drive.google.com/file/d/1J-enhpV9s-fyGsU1hrvZCy5lC4zAzhgi/view?usp=drivesdk
 
 ## Team Members
 
