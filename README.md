@@ -17,5 +17,11 @@ Further both the customer and the shop owner can use the IBM Visual Recognition 
 
 #### Everyone benefits from this free application as while the customer remains safe at home and seamlessly uses Optima for his/her shopping needs, the shop owner gets free analytics that could boost sales and help them benefit in these tough times, while being able to monitor the customer’s requirements.
 
+## Team Members
+
+1. Abhishek Kumar Singh
+2. Manorama Maharana
+3. Saksham Gupta
+
 
 
