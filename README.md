@@ -17,15 +17,15 @@ Further both the customer and the shop owner can use the IBM Visual Recognition 
 
 #### Everyone benefits from this free application as while the customer remains safe at home and seamlessly uses Optima for his/her shopping needs, the shop owner gets free analytics that could boost sales and help them benefit in these tough times, while being able to monitor the customer’s requirements.
 
-## Technical Stack Used
-
-1. Flutter Framework - App development on Android Studio and VS Code. Functionality aided by select pub Dev packages.
-2. Firebase backend - Realtime database for inventory, firebase storage for graphs.
-3. IBM services- Watson Chatbot and Visual Recognition services
-
 ## Drive Link to the apk
 
 https://drive.google.com/file/d/1J-enhpV9s-fyGsU1hrvZCy5lC4zAzhgi/view?usp=drivesdk
+
+## Technical Stack Used
+
+1. Flutter Framework - App development on Android Studio and VS Code. Functionality aided by select pub dev packages.
+2. Firebase backend - Realtime database for inventory, firebase storage for graphs.
+3. IBM services- Watson Chatbot and Visual Recognition services
 
 ## Team Members
 
